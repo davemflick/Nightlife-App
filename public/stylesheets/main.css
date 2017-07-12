@@ -7,4 +7,19 @@ body, html {
 body {
   background-color: #ddd; }
 
+.headerContainer h1, .headerContainer p {
+  text-align: center; }
+
+.mainBodyContainer .searchFormContainer {
+  width: 80%;
+  border: 1px solid black;
+  margin: 0 auto;
+  padding: 2em; }
+
+.searchResultsContainer {
+  width: 80%;
+  margin: 10px auto;
+  border: 1px solid black;
+  padding: 2em; }
+
 /*# sourceMappingURL=main.css.map */
