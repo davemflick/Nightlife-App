@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+var mongoose = require('mongoose');
 
 var SearchesSchema = new mongoose.Schema({
 	city: String,
-	results: {type:Array, default: []}
+	results: {type:Array, default: []},
 	timeStamp: {type:Date, default:Date.now}
 })
 

@@ -16,6 +16,8 @@ mongoose.Promise = global.Promise;
 var User = require('./models/User');
 var Searches = require('./models/Searches');
 
+mongoose.connect('mongodb://localhost/nightlife');
+
 //App Set Up
 app.set('view engine', 'pug');
 app.use(express.static('public'));
@@ -52,20 +54,23 @@ app.get('/', function(req, res, next){
 
 app.get('/results/:id', function(req, res, next){
 	var city = req.params.id;
-    var token = yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
+    yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
 		.then((res)=>{
 			var client=yelp.client(res.jsonBody.access_token);
 			client.search({
 			  location: city,
 			  limit: 2
 			}).then(response => {
-			  return response.jsonBody;
+			  return returnResponse(response);
 			}).catch(e => {
 			  console.log(e);
 			});
 		}).catch((e)=>{console.log('THIS IS ERROR: ' + e)});
 
-	res.json({locationDate: token})
+	function returnResponse(data){
+		return res.json({locationData: data})
+	}
+	
 })
 
 app.post('/search', function(req, res, next){
