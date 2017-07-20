@@ -12,13 +12,12 @@ export default class SearchBar extends Component{
 
 	handleChange(location){
 		this.setState({location});
-		console.log(location)
 	}
 
 	render(){
 		return(
 			<div className='searchFormContainer'>
-				<form onSubmit={()=> e.preventDefault()} >
+				<form onSubmit={()=> e.preventDefault()} action='search' method='post'>
 					<div className='form-group'>
 						<label>Search City</label>
     					<input 

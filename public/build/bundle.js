@@ -29793,6 +29793,10 @@ var _MainBody = __webpack_require__(229);
 
 var _MainBody2 = _interopRequireDefault(_MainBody);
 
+var _axios = __webpack_require__(110);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29804,10 +29808,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Home = function (_Component) {
 	_inherits(Home, _Component);
 
-	function Home() {
+	function Home(props) {
 		_classCallCheck(this, Home);
 
-		return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+
+		_this.state = {
+			bars: []
+		};
+
+		_axios2.default.get('/results/:id').then(function (res) {
+			console.log(res);
+		});
+
+		return _this;
 	}
 
 	_createClass(Home, [{
@@ -37104,7 +37118,6 @@ var SearchBar = function (_Component) {
 		key: 'handleChange',
 		value: function handleChange(location) {
 			this.setState({ location: location });
-			console.log(location);
 		}
 	}, {
 		key: 'render',
@@ -37118,7 +37131,7 @@ var SearchBar = function (_Component) {
 					'form',
 					{ onSubmit: function onSubmit() {
 							return e.preventDefault();
-						} },
+						}, action: 'search', method: 'post' },
 					_react2.default.createElement(
 						'div',
 						{ className: 'form-group' },

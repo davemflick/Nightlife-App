@@ -13,7 +13,8 @@ var yelp = require('yelp-fusion');
 mongoose.Promise = global.Promise;
 
 //Models
-var User = require('./models/user');
+var User = require('./models/User');
+var Searches = require('./models/Searches');
 
 //App Set Up
 app.set('view engine', 'pug');
