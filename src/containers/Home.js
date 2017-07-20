@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Header from './Header';
 import MainBody from './MainBody';
 import axios from 'axios';
@@ -11,8 +10,7 @@ export default class Home extends Component{
 			bars: [],
 			city: ''
 		}
-
-		axios.get('/results/:id').then((res)=>{console.log("Hello")})
+		//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
 
 	}
 
@@ -21,11 +19,7 @@ export default class Home extends Component{
 		return(
 		<div className='mainContainer'>
 			<Header />
-			<Router>
-				<Switch>
-					<Route path={'/results/' + this.state.city} component={MainBody} />
-				</Switch>
-			</Router>
+			<MainBody />
 		</div>
 		)
 	}

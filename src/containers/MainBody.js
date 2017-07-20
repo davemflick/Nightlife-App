@@ -9,14 +9,22 @@ import SearchResults from '../components/SearchResults';
 export default class MainBody extends Component{
 	constructor(props){
 		super(props);
-		this.state = {};
+		this.state = {
+			bars: [],
+			city: ''
+		}
+		//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
 	}
 
 	render(){
 		return(
 			<div className='mainBodyContainer'>
 				<SearchBar />
-				<SearchResults />
+				<Router>
+					<Switch>
+						<Route path={'/results/'} component={SearchResults} />
+					</Switch>
+				</Router>
 			</div>
 		)
 	}

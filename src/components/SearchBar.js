@@ -17,7 +17,7 @@ export default class SearchBar extends Component{
 	render(){
 		return(
 			<div className='searchFormContainer'>
-				<form onSubmit={()=> e.preventDefault()} action='search' method='post'>
+				<form onSubmit={()=> e.preventDefault()} action={'/search/' + this.state.location} method='post'>
 					<div className='form-group'>
 						<label>Search City</label>
     					<input 

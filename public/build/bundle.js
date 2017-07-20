@@ -29785,8 +29785,6 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(230);
-
 var _Header = __webpack_require__(228);
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -29818,13 +29816,9 @@ var Home = function (_Component) {
 		_this.state = {
 			bars: [],
 			city: ''
-		};
+			//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
 
-		_axios2.default.get('/results/:id').then(function (res) {
-			console.log("Hello");
-		});
-
-		return _this;
+		};return _this;
 	}
 
 	_createClass(Home, [{
@@ -29834,15 +29828,7 @@ var Home = function (_Component) {
 				'div',
 				{ className: 'mainContainer' },
 				_react2.default.createElement(_Header2.default, null),
-				_react2.default.createElement(
-					_reactRouterDom.BrowserRouter,
-					null,
-					_react2.default.createElement(
-						_reactRouterDom.Switch,
-						null,
-						_react2.default.createElement(_reactRouterDom.Route, { path: '/results/' + this.state.city, component: _MainBody2.default })
-					)
-				)
+				_react2.default.createElement(_MainBody2.default, null)
 			);
 		}
 	}]);
@@ -29962,8 +29948,11 @@ var MainBody = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (MainBody.__proto__ || Object.getPrototypeOf(MainBody)).call(this, props));
 
-		_this.state = {};
-		return _this;
+		_this.state = {
+			bars: [],
+			city: ''
+			//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
+		};return _this;
 	}
 
 	_createClass(MainBody, [{
@@ -29973,7 +29962,15 @@ var MainBody = function (_Component) {
 				'div',
 				{ className: 'mainBodyContainer' },
 				_react2.default.createElement(_SearchBar2.default, null),
-				_react2.default.createElement(_SearchResults2.default, null)
+				_react2.default.createElement(
+					_reactRouterDom.BrowserRouter,
+					null,
+					_react2.default.createElement(
+						_reactRouterDom.Switch,
+						null,
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/results/', component: _SearchResults2.default })
+					)
+				)
 			);
 		}
 	}]);
@@ -37142,7 +37139,7 @@ var SearchBar = function (_Component) {
 					'form',
 					{ onSubmit: function onSubmit() {
 							return e.preventDefault();
-						}, action: 'search', method: 'post' },
+						}, action: '/search/' + this.state.location, method: 'post' },
 					_react2.default.createElement(
 						'div',
 						{ className: 'form-group' },

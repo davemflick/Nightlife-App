@@ -59,7 +59,13 @@ app.get('/', function(req, res, next){
 });
 
 app.get('/results/:id', function(req, res, next){
+	res.render('index')
+	
+})
+
+app.post('/search/:id', function(req, res, next){
 	var city = req.params.id;
+	var cityData;
     yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
 		.then((res)=>{
 			var client=yelp.client(res.jsonBody.access_token);
@@ -67,20 +73,25 @@ app.get('/results/:id', function(req, res, next){
 			  location: city,
 			  limit: 2
 			}).then(response => {
-			  return returnResponse(response.jsonBody);
+			  cityData = response.jsonBody;
+			  createCityInstance(city, cityData);
 			}).catch(e => {
 			  console.log(e);
 			});
 		}).catch((e)=>{console.log('THIS IS ERROR: ' + e)});
-
-	function returnResponse(data){
-		return res.json({locationData: data})
-	}
 	
-})
+	function createCityInstance(location, data){
+		var citySearch = {city: location, results: data}
+		Searches.create(citySearch, function(err, city){
+			if(err){
+				console.log(err)
+			} else {
+				res.redirect('/results/' + req.body.location);
+			}
+		});
+	}
 
-app.post('/search', function(req, res, next){
-	res.redirect('/results/' + req.body.location)
+	
 });
 
 
