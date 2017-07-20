@@ -16,7 +16,13 @@ mongoose.Promise = global.Promise;
 var User = require('./models/User');
 var Searches = require('./models/Searches');
 
-mongoose.connect('mongodb://localhost/nightlife');
+mongoose.connect('mongodb://localhost/nightlife', {useMongoClient: true}, (err)=>{
+	if(err){
+		console.log("Error connecting to database, error= " + err);
+	} else {
+		console.log("Mongoose connected to database");
+	}
+});
 
 //App Set Up
 app.set('view engine', 'pug');
@@ -61,7 +67,7 @@ app.get('/results/:id', function(req, res, next){
 			  location: city,
 			  limit: 2
 			}).then(response => {
-			  return returnResponse(response);
+			  return returnResponse(response.jsonBody);
 			}).catch(e => {
 			  console.log(e);
 			});
@@ -74,7 +80,6 @@ app.get('/results/:id', function(req, res, next){
 })
 
 app.post('/search', function(req, res, next){
-	console.log(req.body);
 	res.redirect('/results/' + req.body.location)
 });
 

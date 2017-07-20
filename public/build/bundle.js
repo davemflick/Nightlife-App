@@ -29785,6 +29785,8 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(230);
+
 var _Header = __webpack_require__(228);
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -29814,11 +29816,12 @@ var Home = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
 		_this.state = {
-			bars: []
+			bars: [],
+			city: ''
 		};
 
 		_axios2.default.get('/results/:id').then(function (res) {
-			console.log(res);
+			console.log("Hello");
 		});
 
 		return _this;
@@ -29831,7 +29834,15 @@ var Home = function (_Component) {
 				'div',
 				{ className: 'mainContainer' },
 				_react2.default.createElement(_Header2.default, null),
-				_react2.default.createElement(_MainBody2.default, null)
+				_react2.default.createElement(
+					_reactRouterDom.BrowserRouter,
+					null,
+					_react2.default.createElement(
+						_reactRouterDom.Switch,
+						null,
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/results/' + this.state.city, component: _MainBody2.default })
+					)
+				)
 			);
 		}
 	}]);
