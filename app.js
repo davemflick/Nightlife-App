@@ -73,7 +73,7 @@ app.post('/search/:id', function(req, res, next){
 			  location: city,
 			  limit: 2
 			}).then(response => {
-			  cityData = response.jsonBody;
+			  cityData = response.jsonBody.businesses;
 			  createCityInstance(city, cityData);
 			}).catch(e => {
 			  console.log(e);
@@ -81,7 +81,21 @@ app.post('/search/:id', function(req, res, next){
 		}).catch((e)=>{console.log('THIS IS ERROR: ' + e)});
 	
 	function createCityInstance(location, data){
-		var citySearch = {city: location, results: data}
+		var establishments = [];
+		data.forEach(est=>{
+			var bar = {
+				id: est.id,
+				name: est.name,
+				image: est.image_url,
+				address: est.location.display_address,
+				rating: est.rating,
+				price: est.price,
+				peopleGoing: 0,
+				alias: est.alias
+			}
+			establishments.push(bar);
+		});
+		var citySearch = {city: location, results: establishments}
 		Searches.create(citySearch, function(err, city){
 			if(err){
 				console.log(err)
@@ -90,7 +104,6 @@ app.post('/search/:id', function(req, res, next){
 			}
 		});
 	}
-
 	
 });
 
