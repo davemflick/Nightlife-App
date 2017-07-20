@@ -59,7 +59,14 @@ app.get('/', function(req, res, next){
 });
 
 app.get('/results/:id', function(req, res, next){
-	res.render('index')
+
+	Searches.find({}, (err, city)=>{
+		if(err){
+			res.render('error', {error: err})
+		} else {
+			res.json({city: city})
+		}
+	})
 	
 })
 
@@ -91,7 +98,7 @@ app.post('/search/:id', function(req, res, next){
 				rating: est.rating,
 				price: est.price,
 				peopleGoing: 0,
-				alias: est.alias
+				alias: est.categories
 			}
 			establishments.push(bar);
 		});
@@ -104,7 +111,6 @@ app.post('/search/:id', function(req, res, next){
 			}
 		});
 	}
-	
 });
 
 
