@@ -13,8 +13,10 @@ export default class MainBody extends Component{
 			bars: [],
 			city: ''
 		}
-		//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
+		console.log("hello");
+		//axios.get('/results').then((res)=>{console.log('hell0')})
 	}
+
 
 	render(){
 		return(

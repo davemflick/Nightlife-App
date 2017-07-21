@@ -29951,8 +29951,10 @@ var MainBody = function (_Component) {
 		_this.state = {
 			bars: [],
 			city: ''
-			//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
-		};return _this;
+		};
+		console.log("hello");
+		//axios.get('/results').then((res)=>{console.log('hell0')})
+		return _this;
 	}
 
 	_createClass(MainBody, [{
