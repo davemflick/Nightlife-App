@@ -6,10 +6,7 @@ import axios from 'axios';
 export default class Home extends Component{
 	constructor(props){
 		super(props);
-		this.state = {
-			bars: [],
-			city: ''
-		}
+		this.state = {}
 		//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
 
 	}
