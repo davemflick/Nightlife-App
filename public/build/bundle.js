@@ -29813,12 +29813,10 @@ var Home = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
-		_this.state = {
-			bars: [],
-			city: ''
-			//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
+		_this.state = {};
+		//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
 
-		};return _this;
+		return _this;
 	}
 
 	_createClass(Home, [{
