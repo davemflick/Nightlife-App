@@ -69,9 +69,33 @@ app.get('/api/results', function(req, res, next){
 		if(err){
 			res.render('error', {error: err})
 		} else {
-			res.json({city: city})
+			let curDate = new Date()
+			let today = findDate(curDate);
+			let cities = []
+			city.forEach(x=>{
+				if(today === findDate(x.timestamp)){
+					cities.push(x)
+				} else {
+					Searches.findByIdAndRemove(x._id, (err)=>{
+						if(err){
+							console.log(err);
+						} else {
+							console.log("Deleted Result with Id = " + x.id)
+						}
+					})
+				}
+			})
+			console.log(cities);
+			res.json({city: cities})
 		}
 	})
+
+	function findDate(date){
+		let day = date.getDate();
+		let month = date.getMonth();
+		let year = date.getFullYear();
+		return `${day}/${month}/${year}`
+	}
 })
 
 app.get('/results/:id', function(req, res, next){
