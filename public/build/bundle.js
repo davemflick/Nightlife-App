@@ -29965,7 +29965,7 @@ var MainBody = function (_Component) {
 				var city = cityArray[targetIndex];
 				_this2.setState({
 					bars: city.results,
-					city: city
+					city: city.city
 				});
 			}).catch(function (err) {
 				console.log(err);
@@ -37215,6 +37215,10 @@ var _axios = __webpack_require__(69);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _Establishment = __webpack_require__(326);
+
+var _Establishment2 = _interopRequireDefault(_Establishment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37232,19 +37236,40 @@ var SearchResults = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).call(this, props));
 
 		_this.state = {};
-		console.log(_this.props);
+
 		return _this;
 	}
 
 	_createClass(SearchResults, [{
-		key: 'componentWillUpdate',
-		value: function componentWillUpdate() {
-			console.log(this.props);
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			if (this.props !== nextProps) {
+				this.state = nextProps;
+			}
+		}
+	}, {
+		key: 'createEstabs',
+		value: function createEstabs() {
+			if (this.state.bars) {
+				return this.state.bars.map(function (est) {
+					return _react2.default.createElement(_Establishment2.default, { key: est.id, about: est });
+				});
+			} else {
+				return _react2.default.createElement(
+					'div',
+					null,
+					'Loading'
+				);
+			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement('div', { className: 'searchResultsContainer' });
+			return _react2.default.createElement(
+				'div',
+				{ className: 'searchResultsContainer' },
+				this.createEstabs()
+			);
 		}
 	}]);
 
@@ -37252,6 +37277,61 @@ var SearchResults = function (_Component) {
 }(_react.Component);
 
 exports.default = SearchResults;
+
+/***/ }),
+/* 326 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Establishment = function (_Component) {
+	_inherits(Establishment, _Component);
+
+	function Establishment() {
+		_classCallCheck(this, Establishment);
+
+		return _possibleConstructorReturn(this, (Establishment.__proto__ || Object.getPrototypeOf(Establishment)).apply(this, arguments));
+	}
+
+	_createClass(Establishment, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'estabCont' },
+				_react2.default.createElement(
+					'h1',
+					null,
+					this.props.about.name
+				),
+				_react2.default.createElement('img', { src: this.props.about.image })
+			);
+		}
+	}]);
+
+	return Establishment;
+}(_react.Component);
+
+exports.default = Establishment;
 
 /***/ })
 /******/ ]);

@@ -23,7 +23,7 @@ export default class MainBody extends Component{
 			let city = cityArray[targetIndex];
 			this.setState({
 				bars: city.results,
-				city:city
+				city:city.city
 			})
 		}).catch((err)=>{
 			console.log(err)

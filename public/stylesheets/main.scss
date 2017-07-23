@@ -28,6 +28,14 @@ body {
 	margin: 10px auto;
 	border: 1px solid black;
 	padding: 2em;
+
+	.estabCont{
+		border: 1px solid red;
+		margin-bottom: 20px;
+		img{
+			max-width: 200px;
+		}
+	}
 }
 
 

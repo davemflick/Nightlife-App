@@ -65,7 +65,6 @@ app.get('/:id', function(req, res, next){
 
 
 app.get('/api/results', function(req, res, next){
-	console.log(req.query)
 	Searches.find({}, (err, city)=>{
 		if(err){
 			res.render('error', {error: err})
