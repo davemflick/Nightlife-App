@@ -29950,14 +29950,32 @@ var MainBody = function (_Component) {
 			bars: [],
 			city: ''
 		};
-		console.log("hello");
-		//axios.get('/results').then((res)=>{console.log('hell0')})
+
 		return _this;
 	}
 
 	_createClass(MainBody, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
+
+			_axios2.default.get('/api/results').then(function (res) {
+				var cityArray = res.data.city;
+				var targetIndex = cityArray.length - 1;
+				var city = cityArray[targetIndex];
+				_this2.setState({
+					bars: city.results,
+					city: city
+				});
+			}).catch(function (err) {
+				console.log(err);
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this3 = this;
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'mainBodyContainer' },
@@ -29968,7 +29986,10 @@ var MainBody = function (_Component) {
 					_react2.default.createElement(
 						_reactRouterDom.Switch,
 						null,
-						_react2.default.createElement(_reactRouterDom.Route, { path: '/results/', component: _SearchResults2.default })
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/results/' + this.state.city,
+							render: function render(props) {
+								return _react2.default.createElement(_SearchResults2.default, { city: _this3.state.city, bars: _this3.state.bars });
+							} })
 					)
 				)
 			);
@@ -37205,13 +37226,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SearchResults = function (_Component) {
 	_inherits(SearchResults, _Component);
 
-	function SearchResults() {
+	function SearchResults(props) {
 		_classCallCheck(this, SearchResults);
 
-		return _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).call(this, props));
+
+		_this.state = {};
+		console.log(_this.props);
+		return _this;
 	}
 
 	_createClass(SearchResults, [{
+		key: 'componentWillUpdate',
+		value: function componentWillUpdate() {
+			console.log(this.props);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement('div', { className: 'searchResultsContainer' });

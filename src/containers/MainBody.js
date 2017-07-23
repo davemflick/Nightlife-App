@@ -13,8 +13,21 @@ export default class MainBody extends Component{
 			bars: [],
 			city: ''
 		}
-		console.log("hello");
-		//axios.get('/results').then((res)=>{console.log('hell0')})
+		
+	}
+
+	componentDidMount(){
+		axios.get('/api/results').then((res)=>{
+			let cityArray = res.data.city;
+			let targetIndex = cityArray.length - 1
+			let city = cityArray[targetIndex];
+			this.setState({
+				bars: city.results,
+				city:city
+			})
+		}).catch((err)=>{
+			console.log(err)
+		});
 	}
 
 
@@ -24,7 +37,10 @@ export default class MainBody extends Component{
 				<SearchBar />
 				<Router>
 					<Switch>
-						<Route path={'/results/'} component={SearchResults} />
+						<Route path={'/results/' + this.state.city} 
+							   render={(props)=>
+							   	<SearchResults city={this.state.city} bars={this.state.bars}/>
+							   } />
 					</Switch>
 				</Router>
 			</div>

@@ -58,8 +58,14 @@ app.get('/', function(req, res, next){
 	res.render('index');
 });
 
-app.get('/results/:id', function(req, res, next){
+app.get('/:id', function(req, res, next){
+	var city = req.params.id;
+	res.render('index');
+});
 
+
+app.get('/api/results', function(req, res, next){
+	console.log(req.query)
 	Searches.find({}, (err, city)=>{
 		if(err){
 			res.render('error', {error: err})
@@ -67,7 +73,16 @@ app.get('/results/:id', function(req, res, next){
 			res.json({city: city})
 		}
 	})
-	
+})
+
+app.get('/results/:id', function(req, res, next){
+	Searches.find({}, (err, city)=>{
+		if(err){
+			res.render('error', {error: err})
+		} else {
+			res.render('index')
+		}
+	})
 })
 
 app.post('/search/:id', function(req, res, next){
@@ -107,7 +122,7 @@ app.post('/search/:id', function(req, res, next){
 			if(err){
 				console.log(err)
 			} else {
-				res.redirect('/results/' + req.body.location);
+				res.redirect('/results/' + req.params.id);
 			}
 		});
 	}
