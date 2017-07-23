@@ -29978,7 +29978,7 @@ var MainBody = function (_Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'mainBodyContainer' },
+				{ className: 'mainBodyContainer container' },
 				_react2.default.createElement(_SearchBar2.default, null),
 				_react2.default.createElement(
 					_reactRouterDom.BrowserRouter,
@@ -37306,10 +37306,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Establishment = function (_Component) {
 	_inherits(Establishment, _Component);
 
-	function Establishment() {
+	function Establishment(props) {
 		_classCallCheck(this, Establishment);
 
-		return _possibleConstructorReturn(this, (Establishment.__proto__ || Object.getPrototypeOf(Establishment)).apply(this, arguments));
+		return _possibleConstructorReturn(this, (Establishment.__proto__ || Object.getPrototypeOf(Establishment)).call(this, props));
 	}
 
 	_createClass(Establishment, [{
@@ -37317,13 +37317,59 @@ var Establishment = function (_Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: 'estabCont' },
+				{ className: 'estabCont container' },
 				_react2.default.createElement(
 					'h1',
 					null,
 					this.props.about.name
 				),
-				_react2.default.createElement('img', { src: this.props.about.image })
+				_react2.default.createElement(
+					'div',
+					{ className: 'aboutCont' },
+					_react2.default.createElement('img', { className: 'img img-responsive img-rounded', src: this.props.about.image }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'aboutEst ' },
+						_react2.default.createElement(
+							'h4',
+							null,
+							"Rating: " + this.props.about.rating
+						),
+						_react2.default.createElement(
+							'h4',
+							null,
+							"Price: " + this.props.about.price
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'address' },
+							_react2.default.createElement(
+								'h5',
+								null,
+								'Address:'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'addressStart' },
+								this.props.about.address[0]
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								this.props.about.address[1]
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'whosGoing' },
+							_react2.default.createElement(
+								'button',
+								{ className: 'btn btn-warning' },
+								'Going?'
+							)
+						)
+					)
+				)
 			);
 		}
 	}]);

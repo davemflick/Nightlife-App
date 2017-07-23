@@ -58,12 +58,10 @@ app.get('/', function(req, res, next){
 	res.render('index');
 });
 
-app.get('/:id', function(req, res, next){
-	var city = req.params.id;
-	res.render('index');
-});
 
-
+//This api gets called by axios in react.. It will return Searches collection.
+//If any of the Searches are not from the current day, it will delete them.
+//Only return Todays Searches.
 app.get('/api/results', function(req, res, next){
 	Searches.find({}, (err, city)=>{
 		if(err){
@@ -85,7 +83,6 @@ app.get('/api/results', function(req, res, next){
 					})
 				}
 			})
-			console.log(cities);
 			res.json({city: cities})
 		}
 	})
@@ -108,6 +105,8 @@ app.get('/results/:id', function(req, res, next){
 	})
 })
 
+//On City Search, Run a Yelp API call, return results, create new db record of search.
+// Redirect back to results/city
 app.post('/search/:id', function(req, res, next){
 	var city = req.params.id;
 	var cityData;

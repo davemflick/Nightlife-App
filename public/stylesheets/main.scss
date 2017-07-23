@@ -16,7 +16,6 @@ body {
 
 .mainBodyContainer{
 	.searchFormContainer{
-		width: 80%;
 		border: 1px solid black;
 		margin: 0 auto;
 		padding: 2em;
@@ -24,19 +23,68 @@ body {
 }
 
 .searchResultsContainer{
-	width: 80%;
 	margin: 10px auto;
 	border: 1px solid black;
 	padding: 2em;
-
 	.estabCont{
-		border: 1px solid red;
+		border: 2px solid #555;
+		box-shadow: 3px 3px 2px #222;
+		border-radius: 12px;
 		margin-bottom: 20px;
-		img{
-			max-width: 200px;
+		padding: 15px;
+		width: 95%;
+		h1 {
+			text-align: center;
+		}
+		.aboutCont{
+			display: flex;
+			justify-content: space-around;
+			align-items: flex-start;
+			flex-wrap: wrap;
+			img{
+				max-width: 320px;
+				margin-right: 20px;
+				display: inline-block;
+			}
+			.aboutEst {
+				width: auto;
+				.address{
+					h5 {
+						margin-bottom: 3px;
+					}
+					p{
+						padding: 0;
+						margin: 0;
+					}
+				}
+				.whosGoing{
+					margin-top: 15px;
+				}
+			}
 		}
 	}
 }
 
+@media screen and (max-width: 650px){
+	.aboutCont{
+		img.img.img-responsive.img-rounded{
+			max-width: 280px;
+			margin: auto;
+		}
+		.aboutEst{
+			width: 80%;
+		}
+	}
+}
 
+@media screen and (max-width: 480px){
+	.aboutCont{
+		img.img.img-responsive.img-rounded{
+			max-width: 220px;
+		}
+		.aboutEst{
+			width: 90%;
+		}
+	}
+}
 

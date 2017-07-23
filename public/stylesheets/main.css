@@ -11,20 +11,52 @@ body {
   text-align: center; }
 
 .mainBodyContainer .searchFormContainer {
-  width: 80%;
   border: 1px solid black;
   margin: 0 auto;
   padding: 2em; }
 
 .searchResultsContainer {
-  width: 80%;
   margin: 10px auto;
   border: 1px solid black;
   padding: 2em; }
   .searchResultsContainer .estabCont {
-    border: 1px solid red;
-    margin-bottom: 20px; }
-    .searchResultsContainer .estabCont img {
-      max-width: 200px; }
+    border: 2px solid #555;
+    box-shadow: 3px 3px 2px #222;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 15px;
+    width: 95%; }
+    .searchResultsContainer .estabCont h1 {
+      text-align: center; }
+    .searchResultsContainer .estabCont .aboutCont {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      flex-wrap: wrap; }
+      .searchResultsContainer .estabCont .aboutCont img {
+        max-width: 320px;
+        margin-right: 20px;
+        display: inline-block; }
+      .searchResultsContainer .estabCont .aboutCont .aboutEst {
+        width: auto; }
+        .searchResultsContainer .estabCont .aboutCont .aboutEst .address h5 {
+          margin-bottom: 3px; }
+        .searchResultsContainer .estabCont .aboutCont .aboutEst .address p {
+          padding: 0;
+          margin: 0; }
+        .searchResultsContainer .estabCont .aboutCont .aboutEst .whosGoing {
+          margin-top: 15px; }
+
+@media screen and (max-width: 650px) {
+  .aboutCont img.img.img-responsive.img-rounded {
+    max-width: 280px;
+    margin: auto; }
+  .aboutCont .aboutEst {
+    width: 80%; } }
+@media screen and (max-width: 480px) {
+  .aboutCont img.img.img-responsive.img-rounded {
+    max-width: 220px; }
+  .aboutCont .aboutEst {
+    width: 90%; } }
 
 /*# sourceMappingURL=main.css.map */

@@ -33,7 +33,7 @@ export default class MainBody extends Component{
 
 	render(){
 		return(
-			<div className='mainBodyContainer'>
+			<div className='mainBodyContainer container'>
 				<SearchBar />
 				<Router>
 					<Switch>
