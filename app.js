@@ -92,6 +92,7 @@ app.post('/search/:id', function(req, res, next){
 			var client=yelp.client(res.jsonBody.access_token);
 			client.search({
 			  location: city,
+			  term: 'bar',
 			  limit: 2
 			}).then(response => {
 			  cityData = response.jsonBody.businesses;
