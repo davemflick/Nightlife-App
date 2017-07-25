@@ -7,8 +7,10 @@ body, html {
 body {
   background-color: #ddd; }
 
-.headerContainer h1, .headerContainer p {
+.headerContainer {
   text-align: center; }
+  .headerContainer h1, .headerContainer a {
+    text-align: center; }
 
 .mainBodyContainer .searchFormContainer {
   border: 1px solid black;

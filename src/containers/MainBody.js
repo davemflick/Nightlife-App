@@ -30,7 +30,6 @@ export default class MainBody extends Component{
 		});
 	}
 
-
 	render(){
 		return(
 			<div className='mainBodyContainer container'>
