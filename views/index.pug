@@ -1,8 +1,11 @@
 extends layout
 
 block content
+	if user
+		p= 'Hello ' + user[0].twitter.username
+	else
+		p Not logged in
 	#root
-
 
  
 	script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js",

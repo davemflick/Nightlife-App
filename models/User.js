@@ -5,8 +5,8 @@ var UserSchema = new mongoose.Schema({
 	twitter: {
 		id: String,
 		token: String,
-		email: String,
-		name: String
+		displayName: String,
+		username: String
 	},
 	searches: {type:Array, default: []},
 	going: {type:Array, default: []},
