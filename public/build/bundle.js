@@ -29882,9 +29882,9 @@ var Header = function (_Component) {
 					' My Nightlife '
 				),
 				_react2.default.createElement(
-					'p',
-					null,
-					' This will be Login Option '
+					'a',
+					{ href: '/twitter/login' },
+					'Login With Twitter! '
 				)
 			);
 		}
