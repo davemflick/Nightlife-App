@@ -5,7 +5,7 @@ export default class Header extends Component{
 		return(
 			<div className='headerContainer'>
 				<h1 className='mainHeader'> My Nightlife </h1>
-				<p> This will be Login Option </p>
+				<a href='/twitter/login'>Login With Twitter! </a>
 			</div>
 		)
 	}
