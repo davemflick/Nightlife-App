@@ -51,31 +51,8 @@ passport.use(new TwitStrategy({
 	consumerKey: process.env.TWITTER_KEY,
 	consumerSecret: process.env.TWITTER_SECRET,
 	callbackURL: 'http://localhost:3000/twitter/return'
-}, function(token, tokenSecret, profile, done){
-	process.nextTick(function(){
-		User.find({'twitter.id' : profile.id}, function(err, user){
-			if(err){
-				console.log("Error in twitterAuth");
-				return done(err);
-			}
-			if(user){
-				return done(null, user);
-			} else {
-				var createUser = new User();
-				createUser.twitter.id = profile.id;
-				createUser.twitter.token = token;
-				createUser.twitter.username = profile.username;
-				createUser.twitter.displayName = profile.displayName;
-				User.create(createUser, function(err, newUser){
-					if(err){
-						console.log("Error in creating new user - " + err)
-					} else {
-						return done(null, newUser);
-					}
-				})
-			}
-		})
-	})
+}, function(token, tokenSecret, profile, callback){
+	return callback(null, profile);
 }));
 
 //  function(token, tokenSecret, profile, callback){
