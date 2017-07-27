@@ -12,7 +12,8 @@ export default class MainBody extends Component{
 		super(props);
 		this.state = {
 			bars: [],
-			city: ''
+			city: '',
+			data: []
 		}
 		
 	}
@@ -20,11 +21,12 @@ export default class MainBody extends Component{
 	componentDidMount(){
 		axios.get('/api/results').then((res)=>{
 			let cityArray = res.data.city;
-			let targetIndex = cityArray.length - 1
+			let targetIndex = cityArray.length - 1;
 			let city = cityArray[targetIndex];
 			this.setState({
 				bars: city.results,
-				city:city.city
+				city:city.city,
+				data: res.data.city
 			})
 		}).catch((err)=>{
 			console.log(err)
@@ -46,7 +48,7 @@ export default class MainBody extends Component{
 						<Route path={'/failed-login'} component={Failed} />
 						<Route path={'/results/' + this.state.city} 
 							   render={(props)=>
-							   	<SearchResults city={this.state.city} bars={this.state.bars} user={this.state.user}/>
+							   	<SearchResults city={this.state.city} bars={this.state.bars} user={this.state.user} data={this.state.data}/>
 							   } />
 					</Switch>
 				</Router>

@@ -5,15 +5,51 @@ export default class Establishment extends Component{
 		super(props);
 	}
 
+	componentWillReceiveProps(nextProps){
+		if(this.props !== nextProps){
+			console.log(this.props, nextProps)
+		}
+	}
+
 	findUserInEstabs(){
+		let userGoing = false;
 		console.log(this.props.about)
+		this.props.about.peopleGoing.forEach(person=>{
+			console.log('Person: ' + person + ' props.user: ' + this.props.user)
+			if(person === this.props.user){
+				userGoing = true;
+			}
+		})
+		return userGoing
+	}
+
+	determineButtonRender(){
+		let userGoing = this.findUserInEstabs();
+		let user = this.props.user;
+		let estab = this.props.about.id
+		let id;
+		this.props.data.forEach(city=>{
+			if(city.city === this.props.about.city){
+				id = city._id;
+			}
+		})
+
+		if(!userGoing){
+			return(
+				<form onSubmit={()=> e.preventDefault()} action={'/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT'} method='post'>
+					<button className='btn btn-warning' type='submit'> Going? </button>
+				</form>
+			)
+		} else {
+			return <h4> YOU"RE GOING </h4>
+		}
 	}
 
 	renderIfGoing(){
+		this.determineButtonRender()
 		let user = this.props.user;
-		console.log(this.props.about)
 		if(user !== '' && user !== 'noUser'){
-			return <button className='btn btn-warning'>Going?</button>
+			return this.determineButtonRender();
 		} else {
 			return (
 				<div>

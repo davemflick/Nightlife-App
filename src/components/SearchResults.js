@@ -21,7 +21,7 @@ export default class SearchResults extends Component{
 	createEstabs(){
 		if(this.state.bars){
 			return this.state.bars.map(est=>{
-				return <Establishment key={est.id} about={est} user={this.state.user} />
+				return <Establishment key={est.id} about={est} user={this.state.user} data={this.state.data}/>
 			})
 		} else {
 			return <div>Loading</div>

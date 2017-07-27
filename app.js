@@ -84,9 +84,8 @@ app.get('/failed-login', function(req, res, next){
 app.get('/twitter/login', passport.authenticate('twitter'));
 
 app.get('/twitter/return', passport.authenticate('twitter', {
-	failureRedirect: '/failed-login',
-	successRedirect: '/'
-}), function(req, res){});
+	failureRedirect: '/failed-login'
+}), function(req, res){res.redirect('back')});
 
 app.get('/logout', function(req, res){
 	req.logout();
@@ -108,6 +107,25 @@ app.get('/api/user', function(req, res, next){
 		res.json({user: 'noUser'});
 	}
 });
+
+app.put('/add-user/:id/:user/:estab', function(req, res, next){
+	let id = req.params.id;
+	let user = req.params.user;
+	let estab = req.params.estab;
+	Searches.findByIdAndUpdate(id, req.body, function(err, foundCity){
+		if(err){
+			console.log(err);
+		} else {
+			foundCity.results.forEach((bar,i)=>{
+				if(bar.id === estab){
+					foundCity.results[i].peopleGoing.push(user);
+				}
+			});
+			res.redirect('back')
+		}
+	});
+
+})
 
 
 app.listen(process.env.PORT || 3000, process.env.IP, function(err){

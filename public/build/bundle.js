@@ -29997,7 +29997,8 @@ var MainBody = function (_Component) {
 
 		_this.state = {
 			bars: [],
-			city: ''
+			city: '',
+			data: []
 		};
 
 		return _this;
@@ -30014,7 +30015,8 @@ var MainBody = function (_Component) {
 				var city = cityArray[targetIndex];
 				_this2.setState({
 					bars: city.results,
-					city: city.city
+					city: city.city,
+					data: res.data.city
 				});
 			}).catch(function (err) {
 				console.log(err);
@@ -30045,7 +30047,7 @@ var MainBody = function (_Component) {
 						_react2.default.createElement(_reactRouterDom.Route, { path: '/failed-login', component: _Failed2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { path: '/results/' + this.state.city,
 							render: function render(props) {
-								return _react2.default.createElement(_SearchResults2.default, { city: _this3.state.city, bars: _this3.state.bars, user: _this3.state.user });
+								return _react2.default.createElement(_SearchResults2.default, { city: _this3.state.city, bars: _this3.state.bars, user: _this3.state.user, data: _this3.state.data });
 							} })
 					)
 				)
@@ -37313,7 +37315,7 @@ var SearchResults = function (_Component) {
 
 			if (this.state.bars) {
 				return this.state.bars.map(function (est) {
-					return _react2.default.createElement(_Establishment2.default, { key: est.id, about: est, user: _this2.state.user });
+					return _react2.default.createElement(_Establishment2.default, { key: est.id, about: est, user: _this2.state.user, data: _this2.state.data });
 				});
 			} else {
 				return _react2.default.createElement(
@@ -37374,21 +37376,69 @@ var Establishment = function (_Component) {
 	}
 
 	_createClass(Establishment, [{
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			if (this.props !== nextProps) {
+				console.log(this.props, nextProps);
+			}
+		}
+	}, {
 		key: 'findUserInEstabs',
 		value: function findUserInEstabs() {
+			var _this2 = this;
+
+			var userGoing = false;
 			console.log(this.props.about);
+			this.props.about.peopleGoing.forEach(function (person) {
+				console.log('Person: ' + person + ' props.user: ' + _this2.props.user);
+				if (person === _this2.props.user) {
+					userGoing = true;
+				}
+			});
+			return userGoing;
+		}
+	}, {
+		key: 'determineButtonRender',
+		value: function determineButtonRender() {
+			var _this3 = this;
+
+			var userGoing = this.findUserInEstabs();
+			var user = this.props.user;
+			var estab = this.props.about.id;
+			var id = void 0;
+			this.props.data.forEach(function (city) {
+				if (city.city === _this3.props.about.city) {
+					id = city._id;
+				}
+			});
+
+			if (!userGoing) {
+				return _react2.default.createElement(
+					'form',
+					{ onSubmit: function onSubmit() {
+							return e.preventDefault();
+						}, action: '/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT', method: 'post' },
+					_react2.default.createElement(
+						'button',
+						{ className: 'btn btn-warning', type: 'submit' },
+						' Going? '
+					)
+				);
+			} else {
+				return _react2.default.createElement(
+					'h4',
+					null,
+					' YOU"RE GOING '
+				);
+			}
 		}
 	}, {
 		key: 'renderIfGoing',
 		value: function renderIfGoing() {
+			this.determineButtonRender();
 			var user = this.props.user;
-			console.log(this.props.about);
 			if (user !== '' && user !== 'noUser') {
-				return _react2.default.createElement(
-					'button',
-					{ className: 'btn btn-warning' },
-					'Going?'
-				);
+				return this.determineButtonRender();
 			} else {
 				return _react2.default.createElement(
 					'div',
