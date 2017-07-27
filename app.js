@@ -84,15 +84,29 @@ app.get('/failed-login', function(req, res, next){
 app.get('/twitter/login', passport.authenticate('twitter'));
 
 app.get('/twitter/return', passport.authenticate('twitter', {
-	failureRedirect: '/',
+	failureRedirect: '/failed-login',
 	successRedirect: '/'
 }), function(req, res){});
+
+app.get('/logout', function(req, res){
+	req.logout();
+	res.redirect('back');
+})
 
 
 //middleware to determine if user is logged in or not, pass to every template
 app.use((req,res,next)=>{
 	res.locals.currentUser = req.user;
 	next();
+});
+
+//This api will determine if there is a user logged in.
+app.get('/api/user', function(req, res, next){
+	if(req.user){
+		res.json({user: req.user.username});
+	} else {
+		res.json({user: 'noUser'});
+	}
 });
 
 
