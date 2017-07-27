@@ -29813,19 +29813,31 @@ var Home = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
-		_this.state = {};
-		//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
+		_this.state = {
+			user: ''
+		};
 
 		return _this;
 	}
 
 	_createClass(Home, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
+
+			_axios2.default.get('/api/user').then(function (res) {
+				_this2.setState({ user: res.data.user });
+			}).catch(function (err) {
+				console.log(err);
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'mainContainer' },
-				_react2.default.createElement(_Header2.default, null),
+				_react2.default.createElement(_Header2.default, { user: this.state.user }),
 				_react2.default.createElement(_MainBody2.default, null)
 			);
 		}
@@ -29864,13 +29876,50 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Header = function (_Component) {
 	_inherits(Header, _Component);
 
-	function Header() {
+	function Header(props) {
 		_classCallCheck(this, Header);
 
-		return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+
+		_this.state = {};
+		return _this;
 	}
 
 	_createClass(Header, [{
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			if (this.props !== nextProps) {
+				this.setState({ user: nextProps.user });
+			}
+		}
+	}, {
+		key: 'renderLoginOption',
+		value: function renderLoginOption() {
+			var user = this.state.user;
+			if (user && user !== 'noUser') {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'h5',
+						null,
+						'Hello @' + user
+					),
+					_react2.default.createElement(
+						'a',
+						{ href: '/logout' },
+						' Log Out '
+					)
+				);
+			} else {
+				return _react2.default.createElement(
+					'a',
+					{ href: '/twitter/login' },
+					'Login With Twitter! '
+				);
+			}
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
@@ -29881,11 +29930,7 @@ var Header = function (_Component) {
 					{ className: 'mainHeader' },
 					' My Nightlife '
 				),
-				_react2.default.createElement(
-					'a',
-					{ href: '/twitter/login' },
-					'Login With Twitter! '
-				)
+				this.renderLoginOption()
 			);
 		}
 	}]);
