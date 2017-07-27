@@ -29838,7 +29838,7 @@ var Home = function (_Component) {
 				'div',
 				{ className: 'mainContainer' },
 				_react2.default.createElement(_Header2.default, { user: this.state.user }),
-				_react2.default.createElement(_MainBody2.default, null)
+				_react2.default.createElement(_MainBody2.default, { user: this.state.user })
 			);
 		}
 	}]);
@@ -30021,6 +30021,13 @@ var MainBody = function (_Component) {
 			});
 		}
 	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			if (this.props !== nextProps) {
+				this.setState({ user: nextProps.user });
+			}
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var _this3 = this;
@@ -30038,7 +30045,7 @@ var MainBody = function (_Component) {
 						_react2.default.createElement(_reactRouterDom.Route, { path: '/failed-login', component: _Failed2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { path: '/results/' + this.state.city,
 							render: function render(props) {
-								return _react2.default.createElement(_SearchResults2.default, { city: _this3.state.city, bars: _this3.state.bars });
+								return _react2.default.createElement(_SearchResults2.default, { city: _this3.state.city, bars: _this3.state.bars, user: _this3.state.user });
 							} })
 					)
 				)
@@ -37285,7 +37292,9 @@ var SearchResults = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).call(this, props));
 
-		_this.state = {};
+		_this.state = {
+			user: _this.props.user
+		};
 
 		return _this;
 	}
@@ -37300,9 +37309,11 @@ var SearchResults = function (_Component) {
 	}, {
 		key: 'createEstabs',
 		value: function createEstabs() {
+			var _this2 = this;
+
 			if (this.state.bars) {
 				return this.state.bars.map(function (est) {
-					return _react2.default.createElement(_Establishment2.default, { key: est.id, about: est });
+					return _react2.default.createElement(_Establishment2.default, { key: est.id, about: est, user: _this2.state.user });
 				});
 			} else {
 				return _react2.default.createElement(
@@ -37363,6 +37374,39 @@ var Establishment = function (_Component) {
 	}
 
 	_createClass(Establishment, [{
+		key: 'renderIfGoing',
+		value: function renderIfGoing() {
+			var user = this.props.user;
+			console.log(user);
+			if (user !== '' && user !== 'noUser') {
+				return _react2.default.createElement(
+					'button',
+					{ className: 'btn btn-warning' },
+					'Going?'
+				);
+			} else {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						null,
+						' Login With',
+						_react2.default.createElement(
+							'span',
+							null,
+							_react2.default.createElement(
+								'a',
+								{ href: '/twitter/login' },
+								' Twitter '
+							)
+						),
+						'to let your friends know you\'re going! '
+					)
+				);
+			}
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
@@ -37412,11 +37456,7 @@ var Establishment = function (_Component) {
 						_react2.default.createElement(
 							'div',
 							{ className: 'whosGoing' },
-							_react2.default.createElement(
-								'button',
-								{ className: 'btn btn-warning' },
-								'Going?'
-							)
+							this.renderIfGoing()
 						)
 					)
 				)

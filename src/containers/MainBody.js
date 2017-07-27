@@ -31,6 +31,12 @@ export default class MainBody extends Component{
 		});
 	}
 
+	componentWillReceiveProps(nextProps){
+		if(this.props !== nextProps){
+			this.setState({user: nextProps.user});
+		}
+	}
+
 	render(){
 		return(
 			<div className='mainBodyContainer container'>
@@ -40,7 +46,7 @@ export default class MainBody extends Component{
 						<Route path={'/failed-login'} component={Failed} />
 						<Route path={'/results/' + this.state.city} 
 							   render={(props)=>
-							   	<SearchResults city={this.state.city} bars={this.state.bars}/>
+							   	<SearchResults city={this.state.city} bars={this.state.bars} user={this.state.user}/>
 							   } />
 					</Switch>
 				</Router>

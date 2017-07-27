@@ -6,7 +6,9 @@ import Establishment from './Establishment';
 export default class SearchResults extends Component{
 	constructor(props){
 		super(props);
-		this.state= {};
+		this.state= {
+			user: this.props.user
+		};
 		
 	}
 
@@ -19,7 +21,7 @@ export default class SearchResults extends Component{
 	createEstabs(){
 		if(this.state.bars){
 			return this.state.bars.map(est=>{
-				return <Establishment key={est.id} about={est} />
+				return <Establishment key={est.id} about={est} user={this.state.user} />
 			})
 		} else {
 			return <div>Loading</div>

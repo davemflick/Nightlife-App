@@ -5,6 +5,21 @@ export default class Establishment extends Component{
 		super(props);
 	}
 
+	renderIfGoing(){
+		let user = this.props.user;
+		console.log(user)
+		if(user !== '' && user !== 'noUser'){
+			return <button className='btn btn-warning'>Going?</button>
+		} else {
+			return (
+				<div>
+				<p> Login With
+					<span><a href='/twitter/login'> Twitter </a></span>
+				 to let your friends know you're going! </p>
+				</div>
+			)
+		}
+	}
 
 	render(){
 		return(
@@ -21,7 +36,7 @@ export default class Establishment extends Component{
 								<p>{this.props.about.address[1]}</p>
 							</div>
 							<div className='whosGoing'>
-								<button className='btn btn-warning'>Going?</button>
+								{this.renderIfGoing()}
 							</div>
 						</div>
 					</div>
