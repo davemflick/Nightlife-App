@@ -52,19 +52,32 @@ router.post('/search/:id', function(req, res, next){
 				address: est.location.display_address,
 				rating: est.rating,
 				price: est.price,
-				peopleGoing: 0,
+				peopleGoing: [],
 				alias: est.categories
 			}
 			establishments.push(bar);
 		});
-		var citySearch = {city: location, results: establishments}
-		Searches.create(citySearch, function(err, city){
+		var citySearch = {city: location.toLowerCase(), results: establishments}
+		Searches.find({city: location.toLowerCase()}, function(err, foundCity){
 			if(err){
-				console.log(err)
+				console.log("Error at Search.find(citySearch). Err = " + err);
 			} else {
-				res.redirect('/results/' + req.params.id);
+				if(foundCity[0]){
+					console.log('city found in db')
+					res.redirect('/results/' + req.params.id)
+				} else {
+					console.log("city not found, adding to db");
+					Searches.create(citySearch, function(err, city){
+						if(err){
+							console.log(err)
+						} else {
+							res.redirect('/results/' + req.params.id);
+						}
+					});
+				}
+				
 			}
-		});
+		})
 	}
 });
 

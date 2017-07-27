@@ -37374,10 +37374,15 @@ var Establishment = function (_Component) {
 	}
 
 	_createClass(Establishment, [{
+		key: 'findUserInEstabs',
+		value: function findUserInEstabs() {
+			console.log(this.props.about);
+		}
+	}, {
 		key: 'renderIfGoing',
 		value: function renderIfGoing() {
 			var user = this.props.user;
-			console.log(user);
+			console.log(this.props.about);
 			if (user !== '' && user !== 'noUser') {
 				return _react2.default.createElement(
 					'button',

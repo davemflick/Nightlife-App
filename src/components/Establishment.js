@@ -5,9 +5,13 @@ export default class Establishment extends Component{
 		super(props);
 	}
 
+	findUserInEstabs(){
+		console.log(this.props.about)
+	}
+
 	renderIfGoing(){
 		let user = this.props.user;
-		console.log(user)
+		console.log(this.props.about)
 		if(user !== '' && user !== 'noUser'){
 			return <button className='btn btn-warning'>Going?</button>
 		} else {
