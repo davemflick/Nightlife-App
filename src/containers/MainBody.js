@@ -4,6 +4,7 @@ import axios from 'axios';
 import yelp from 'yelp-fusion';
 import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
+import Failed from '../components/Failed';
 
 
 export default class MainBody extends Component{
@@ -36,6 +37,7 @@ export default class MainBody extends Component{
 				<SearchBar />
 				<Router>
 					<Switch>
+						<Route path={'/failed-login'} component={Failed} />
 						<Route path={'/results/' + this.state.city} 
 							   render={(props)=>
 							   	<SearchResults city={this.state.city} bars={this.state.bars}/>

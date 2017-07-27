@@ -47,5 +47,8 @@ router.get('/results', function(req, res, next){
 	}
 })
 
+//This api will determine if there is a user logged in.
+// router.get('/user', function())
+
 
 module.exports = router;

@@ -71,15 +71,14 @@ passport.deserializeUser(function(obj, callback){
 });
 
 
-//middleware to determine if user is logged in or not, pass to every template
-app.use((req,res,next)=>{
-	res.locals.currentUser = req.user;
-	next();
-});
 
 //ROUTES
 app.get('/', function(req, res, next){
 	res.render('index', {user: req.user});
+});
+
+app.get('/failed-login', function(req, res, next){
+	res.render('index');
 });
 
 app.get('/twitter/login', passport.authenticate('twitter'));
@@ -87,7 +86,14 @@ app.get('/twitter/login', passport.authenticate('twitter'));
 app.get('/twitter/return', passport.authenticate('twitter', {
 	failureRedirect: '/',
 	successRedirect: '/'
-}), function(req, res){ res.render('index')});
+}), function(req, res){});
+
+
+//middleware to determine if user is logged in or not, pass to every template
+app.use((req,res,next)=>{
+	res.locals.currentUser = req.user;
+	next();
+});
 
 
 app.listen(process.env.PORT || 3000, process.env.IP, function(err){

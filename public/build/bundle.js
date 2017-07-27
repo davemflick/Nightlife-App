@@ -29930,6 +29930,10 @@ var _SearchResults = __webpack_require__(325);
 
 var _SearchResults2 = _interopRequireDefault(_SearchResults);
 
+var _Failed = __webpack_require__(327);
+
+var _Failed2 = _interopRequireDefault(_Failed);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29986,6 +29990,7 @@ var MainBody = function (_Component) {
 					_react2.default.createElement(
 						_reactRouterDom.Switch,
 						null,
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/failed-login', component: _Failed2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { path: '/results/' + this.state.city,
 							render: function render(props) {
 								return _react2.default.createElement(_SearchResults2.default, { city: _this3.state.city, bars: _this3.state.bars });
@@ -37378,6 +37383,35 @@ var Establishment = function (_Component) {
 }(_react.Component);
 
 exports.default = Establishment;
+
+/***/ }),
+/* 327 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+	return _react2.default.createElement(
+		'div',
+		{ className: 'failedLogin' },
+		_react2.default.createElement(
+			'h3',
+			null,
+			' Failed to Log In to Twitter '
+		)
+	);
+};
 
 /***/ })
 /******/ ]);
