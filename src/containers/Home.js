@@ -6,16 +6,25 @@ import axios from 'axios';
 export default class Home extends Component{
 	constructor(props){
 		super(props);
-		this.state = {}
-		//axios.get('/results/Wilmington').then((res)=>{console.log(res.json)})
+		this.state = {
+			user: ''
+		}
 
+	}
+
+	componentDidMount(){
+		axios.get('/api/user').then((res)=>{
+			this.setState({user: res.data.user})
+		}).catch((err)=>{
+			console.log(err)
+		});
 	}
 
 
 	render(){
 		return(
 		<div className='mainContainer'>
-			<Header />
+			<Header user={this.state.user} />
 			<MainBody />
 		</div>
 		)
