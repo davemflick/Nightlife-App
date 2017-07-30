@@ -29838,7 +29838,7 @@ var Home = function (_Component) {
 				'div',
 				{ className: 'mainContainer' },
 				_react2.default.createElement(_Header2.default, { user: this.state.user }),
-				_react2.default.createElement(_MainBody2.default, { user: this.state.user })
+				_react2.default.createElement(_MainBody2.default, null)
 			);
 		}
 	}]);
@@ -30013,22 +30013,25 @@ var MainBody = function (_Component) {
 				var cityArray = res.data.city;
 				var targetIndex = cityArray.length - 1;
 				var city = cityArray[targetIndex];
-				_this2.setState({
+				var myCity = {
 					bars: city.results,
 					city: city.city,
 					data: res.data.city
-				});
+				};
+				console.log('myCity', myCity);
+				_this2.setState(myCity);
 			}).catch(function (err) {
 				console.log(err);
 			});
 		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			if (this.props !== nextProps) {
-				this.setState({ user: nextProps.user });
-			}
-		}
+
+		// componentWillReceiveProps(nextProps){
+		// 	if(this.props !== nextProps){
+		// 		this.setState({user: nextProps.user});
+		// 		console.log('nextprops', this.state)
+		// 	}
+		// }
+
 	}, {
 		key: 'render',
 		value: function render() {
@@ -37240,7 +37243,9 @@ var SearchBar = function (_Component) {
 					),
 					_react2.default.createElement(
 						'button',
-						{ type: 'submit', className: 'btn btn-primary' },
+						{ onSubmit: function onSubmit() {
+								return e.preventDefault();
+							}, type: 'submit', className: 'btn btn-primary' },
 						'Search'
 					)
 				)
@@ -37294,10 +37299,8 @@ var SearchResults = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).call(this, props));
 
-		_this.state = {
-			user: _this.props.user
-		};
-
+		_this.state = {};
+		console.log(_this.props);
 		return _this;
 	}
 
@@ -37305,7 +37308,8 @@ var SearchResults = function (_Component) {
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
 			if (this.props !== nextProps) {
-				this.state = nextProps;
+				console.log(nextProps);
+				this.setState = nextProps;
 			}
 		}
 	}, {
@@ -37372,7 +37376,10 @@ var Establishment = function (_Component) {
 	function Establishment(props) {
 		_classCallCheck(this, Establishment);
 
-		return _possibleConstructorReturn(this, (Establishment.__proto__ || Object.getPrototypeOf(Establishment)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Establishment.__proto__ || Object.getPrototypeOf(Establishment)).call(this, props));
+
+		console.log("inside estbs");
+		return _this;
 	}
 
 	_createClass(Establishment, [{
