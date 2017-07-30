@@ -28,7 +28,7 @@ export default class SearchBar extends Component{
     						onChange={(e)=> this.handleChange(e.target.value)}
     						placeholder="City, State" />
 					</div>
-					<button type='submit' className='btn btn-primary'>Search</button>
+					<button onSubmit={()=> e.preventDefault()} type='submit' className='btn btn-primary'>Search</button>
 				</form>
 			</div>
 		)
