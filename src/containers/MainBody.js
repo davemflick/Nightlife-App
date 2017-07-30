@@ -23,21 +23,24 @@ export default class MainBody extends Component{
 			let cityArray = res.data.city;
 			let targetIndex = cityArray.length - 1;
 			let city = cityArray[targetIndex];
-			this.setState({
+			let myCity = {
 				bars: city.results,
 				city:city.city,
 				data: res.data.city
-			})
+			};
+			console.log('myCity', myCity)
+			this.setState(myCity);
 		}).catch((err)=>{
 			console.log(err)
 		});
 	}
 
-	componentWillReceiveProps(nextProps){
-		if(this.props !== nextProps){
-			this.setState({user: nextProps.user});
-		}
-	}
+	// componentWillReceiveProps(nextProps){
+	// 	if(this.props !== nextProps){
+	// 		this.setState({user: nextProps.user});
+	// 		console.log('nextprops', this.state)
+	// 	}
+	// }
 
 	render(){
 		return(

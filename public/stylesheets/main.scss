@@ -1,11 +1,18 @@
 *{box-sizing: border-box;}
 
+@mixin border-radius($radius){
+	-webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
 body, html {
 	height: 100%;
 }
 
 body {
-	background-color: #ddd;
+	background-color: #eee;
 }
 
 .headerContainer{
@@ -64,6 +71,16 @@ body {
 			}
 		}
 	}
+}
+
+.loginError {
+	border: 2px solid #aaa;
+	@include border-radius(8px);
+	background-color: rgba(234,67,53, 0.9);
+	text-align: center;
+	color: #333;
+	margin-top: 15px;
+	padding: 10px;
 }
 
 @media screen and (max-width: 650px){
