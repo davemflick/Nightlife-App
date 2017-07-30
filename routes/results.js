@@ -47,7 +47,6 @@ router.post('/search/:id', function(req, res, next){
 		data.forEach(est=>{
 			var bar = {
 				id: est.id,
-				city: location.toLowerCase(),
 				name: est.name,
 				image: est.image_url,
 				address: est.location.display_address,
@@ -81,7 +80,6 @@ router.post('/search/:id', function(req, res, next){
 		})
 	}
 });
-
 
 
 module.exports = router;
