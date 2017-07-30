@@ -29995,11 +29995,7 @@ var MainBody = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (MainBody.__proto__ || Object.getPrototypeOf(MainBody)).call(this, props));
 
-		_this.state = {
-			bars: [],
-			city: '',
-			data: []
-		};
+		_this.state = {};
 
 		return _this;
 	}
@@ -30010,15 +30006,27 @@ var MainBody = function (_Component) {
 			var _this2 = this;
 
 			_axios2.default.get('/api/results').then(function (res) {
+				var loc = window.location.href;
+				var city = '';
+				for (var i = loc.length - 1; i > 0; i--) {
+					if (loc[i] === '/') {
+						city = loc.slice(i + 1).toLowerCase();
+						break;
+					}
+				}
 				var cityArray = res.data.city;
-				var targetIndex = cityArray.length - 1;
-				var city = cityArray[targetIndex];
+				var curCity = void 0;
+				for (var i = 0; i < cityArray.length; i++) {
+					if (cityArray[i].city === city.split(' ')[0]) {
+						curCity = cityArray[i];
+						break;
+					}
+				}
 				var myCity = {
-					bars: city.results,
-					city: city.city,
-					data: res.data.city
+					bars: curCity.results,
+					city: city,
+					data: cityArray
 				};
-				console.log('myCity', myCity);
 				_this2.setState(myCity);
 			}).catch(function (err) {
 				console.log(err);
@@ -37299,8 +37307,11 @@ var SearchResults = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).call(this, props));
 
-		_this.state = {};
-		console.log(_this.props);
+		_this.state = {
+			city: _this.props.city,
+			bars: _this.props.bars,
+			data: _this.props.data
+		};
 		return _this;
 	}
 
@@ -37308,7 +37319,6 @@ var SearchResults = function (_Component) {
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
 			if (this.props !== nextProps) {
-				console.log(nextProps);
 				this.setState = nextProps;
 			}
 		}
