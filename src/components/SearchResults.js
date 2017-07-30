@@ -6,13 +6,15 @@ import Establishment from './Establishment';
 export default class SearchResults extends Component{
 	constructor(props){
 		super(props);
-		this.state = {}
-		console.log(this.props)
+		this.state = {
+			city: this.props.city,
+			bars: this.props.bars,
+			data: this.props.data
+		}
 	}
 
 	componentWillReceiveProps(nextProps){
 		if(this.props !== nextProps){
-			console.log(nextProps)
 			this.setState = nextProps;
 		}
 	}
