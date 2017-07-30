@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export default class Establishment extends Component{
 	constructor(props){
 		super(props);
+		console.log("inside estbs")
 	}
 
 	componentWillReceiveProps(nextProps){
