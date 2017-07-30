@@ -10,25 +10,33 @@ import Failed from '../components/Failed';
 export default class MainBody extends Component{
 	constructor(props){
 		super(props);
-		this.state = {
-			bars: [],
-			city: '',
-			data: []
-		}
+		this.state = {}
 		
 	}
 
 	componentDidMount(){
 		axios.get('/api/results').then((res)=>{
+			let loc = window.location.href;
+			let city= '';
+			for(var i=loc.length-1; i>0; i--){
+				if(loc[i] === '/'){
+					city = loc.slice(i+1).toLowerCase();
+					break;
+				}
+			}
 			let cityArray = res.data.city;
-			let targetIndex = cityArray.length - 1;
-			let city = cityArray[targetIndex];
+			let curCity;
+			for(var i=0; i< cityArray.length; i++){
+				if(cityArray[i].city === city.split(' ')[0]){
+					curCity = cityArray[i];
+					break;
+				}
+			}
 			let myCity = {
-				bars: city.results,
-				city:city.city,
-				data: res.data.city
+				bars: curCity.results,
+				city:city,
+				data: cityArray
 			};
-			console.log('myCity', myCity)
 			this.setState(myCity);
 		}).catch((err)=>{
 			console.log(err)
