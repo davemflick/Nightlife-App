@@ -8,10 +8,6 @@ var passport = require('passport');
 var LocalStrategy = require("passport-local");
 var TwitStrategy = require('passport-twitter').Strategy;
 var yelp = require('yelp-fusion');
-var middleware = require('./middleware/middleware');
-
-//Middleware functions;
-var isLoggedIn = middleware.isLoggedIn;
 
 //To get rid of mongoose promise warning
 mongoose.Promise = global.Promise;
@@ -88,8 +84,7 @@ app.get('/failed-login', function(req, res, next){
 app.get('/twitter/login', passport.authenticate('twitter'));
 
 app.get('/twitter/return', passport.authenticate('twitter', {
-	failureRedirect: '/failed-login',
-	successRedirect: 'back'
+	failureRedirect: '/failed-login'
 }), function(req, res){res.redirect('back')});
 
 app.get('/logout', function(req, res){
@@ -140,10 +135,3 @@ app.listen(process.env.PORT || 3000, process.env.IP, function(err){
 		console.log('NIGHTLIFE SERVER UP AND RUNNING');
 	}
 })
-
-
-
-
-
-
-
