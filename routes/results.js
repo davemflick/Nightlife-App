@@ -46,6 +46,7 @@ router.post('/search/:id', function(req, res, next){
 		var establishments = [];
 		data.forEach(est=>{
 			var bar = {
+				city: location.toLowerCase(),
 				id: est.id,
 				name: est.name,
 				image: est.image_url,

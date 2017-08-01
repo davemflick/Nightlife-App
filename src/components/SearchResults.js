@@ -14,11 +14,11 @@ export default class SearchResults extends Component{
 		}
 	}
 
-	componentWillReceiveProps(nextProps){
-		if(this.props !== nextProps){
-			this.setState = nextProps;
-		}
-	}
+	// componentWillReceiveProps(nextProps){
+	// 	if(this.props !== nextProps){
+	// 		this.setState = nextProps;
+	// 	}
+	// }
 
 	createEstabs(){
 		if(this.state.bars){

@@ -3,18 +3,11 @@ import React, { Component } from 'react';
 export default class Establishment extends Component{
 	constructor(props){
 		super(props);
-		console.log("inside estbs")
-	}
-
-	componentWillReceiveProps(nextProps){
-		if(this.props !== nextProps){
-			console.log(this.props, nextProps)
-		}
+		console.log(this.props);
 	}
 
 	findUserInEstabs(){
 		let userGoing = false;
-		console.log(this.props.about)
 		this.props.about.peopleGoing.forEach(person=>{
 			console.log('Person: ' + person + ' props.user: ' + this.props.user)
 			if(person === this.props.user){
@@ -34,11 +27,11 @@ export default class Establishment extends Component{
 				id = city._id;
 			}
 		})
-
+		//console.log(user);
 		if(!userGoing){
 			return(
 				<form onSubmit={()=> e.preventDefault()} action={'/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT'} method='post'>
-					<button className='btn btn-warning' type='submit'> Going? </button>
+					<input className='btn btn-warning' type='submit' value='Going?' name='isGoing'/>
 				</form>
 			)
 		} else {

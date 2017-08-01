@@ -46,7 +46,6 @@ export default class MainBody extends Component{
 	componentWillReceiveProps(nextProps){
 		if(this.props !== nextProps){
 			this.setState({user: nextProps.user});
-			console.log('nextprops', this.state)
 		}
 	}
 

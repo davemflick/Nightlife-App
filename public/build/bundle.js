@@ -30037,7 +30037,6 @@ var MainBody = function (_Component) {
 		value: function componentWillReceiveProps(nextProps) {
 			if (this.props !== nextProps) {
 				this.setState({ user: nextProps.user });
-				console.log('nextprops', this.state);
 			}
 		}
 	}, {
@@ -37316,14 +37315,13 @@ var SearchResults = function (_Component) {
 		return _this;
 	}
 
+	// componentWillReceiveProps(nextProps){
+	// 	if(this.props !== nextProps){
+	// 		this.setState = nextProps;
+	// 	}
+	// }
+
 	_createClass(SearchResults, [{
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			if (this.props !== nextProps) {
-				this.setState = nextProps;
-			}
-		}
-	}, {
 		key: 'createEstabs',
 		value: function createEstabs() {
 			var _this2 = this;
@@ -37389,24 +37387,16 @@ var Establishment = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (Establishment.__proto__ || Object.getPrototypeOf(Establishment)).call(this, props));
 
-		console.log("inside estbs");
+		console.log(_this.props);
 		return _this;
 	}
 
 	_createClass(Establishment, [{
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			if (this.props !== nextProps) {
-				console.log(this.props, nextProps);
-			}
-		}
-	}, {
 		key: 'findUserInEstabs',
 		value: function findUserInEstabs() {
 			var _this2 = this;
 
 			var userGoing = false;
-			console.log(this.props.about);
 			this.props.about.peopleGoing.forEach(function (person) {
 				console.log('Person: ' + person + ' props.user: ' + _this2.props.user);
 				if (person === _this2.props.user) {
@@ -37429,18 +37419,14 @@ var Establishment = function (_Component) {
 					id = city._id;
 				}
 			});
-
+			//console.log(user);
 			if (!userGoing) {
 				return _react2.default.createElement(
 					'form',
 					{ onSubmit: function onSubmit() {
 							return e.preventDefault();
 						}, action: '/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT', method: 'post' },
-					_react2.default.createElement(
-						'button',
-						{ className: 'btn btn-warning', type: 'submit' },
-						' Going? '
-					)
+					_react2.default.createElement('input', { className: 'btn btn-warning', type: 'submit', value: 'Going?', name: 'isGoing' })
 				);
 			} else {
 				return _react2.default.createElement(
