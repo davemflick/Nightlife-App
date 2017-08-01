@@ -9,7 +9,8 @@ export default class SearchResults extends Component{
 		this.state = {
 			city: this.props.city,
 			bars: this.props.bars,
-			data: this.props.data
+			data: this.props.data,
+			user: this.props.user
 		}
 	}
 

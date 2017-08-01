@@ -29838,7 +29838,7 @@ var Home = function (_Component) {
 				'div',
 				{ className: 'mainContainer' },
 				_react2.default.createElement(_Header2.default, { user: this.state.user }),
-				_react2.default.createElement(_MainBody2.default, null)
+				_react2.default.createElement(_MainBody2.default, { user: this.state.user })
 			);
 		}
 	}]);
@@ -30032,14 +30032,14 @@ var MainBody = function (_Component) {
 				console.log(err);
 			});
 		}
-
-		// componentWillReceiveProps(nextProps){
-		// 	if(this.props !== nextProps){
-		// 		this.setState({user: nextProps.user});
-		// 		console.log('nextprops', this.state)
-		// 	}
-		// }
-
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			if (this.props !== nextProps) {
+				this.setState({ user: nextProps.user });
+				console.log('nextprops', this.state);
+			}
+		}
 	}, {
 		key: 'render',
 		value: function render() {
@@ -37310,7 +37310,8 @@ var SearchResults = function (_Component) {
 		_this.state = {
 			city: _this.props.city,
 			bars: _this.props.bars,
-			data: _this.props.data
+			data: _this.props.data,
+			user: _this.props.user
 		};
 		return _this;
 	}

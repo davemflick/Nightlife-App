@@ -25,7 +25,7 @@ export default class Home extends Component{
 		return(
 		<div className='mainContainer'>
 			<Header user={this.state.user} />
-			<MainBody  />
+			<MainBody user={this.state.user} />
 		</div>
 		)
 	}
