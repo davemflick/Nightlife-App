@@ -9,8 +9,7 @@ export default class SearchResults extends Component{
 		this.state = {
 			city: this.props.city,
 			bars: this.props.bars,
-			data: this.props.data,
-			user: this.props.user
+			data: this.props.data
 		}
 	}
 
@@ -23,7 +22,7 @@ export default class SearchResults extends Component{
 	createEstabs(){
 		if(this.state.bars){
 			return this.state.bars.map(est=>{
-				return <Establishment key={est.id} about={est} user={this.state.user} data={this.state.data}/>
+				return <Establishment key={est.id} about={est} user={this.props.user} data={this.state.data}/>
 			})
 		} else {
 			return <div>Loading</div>

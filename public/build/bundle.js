@@ -37309,8 +37309,7 @@ var SearchResults = function (_Component) {
 		_this.state = {
 			city: _this.props.city,
 			bars: _this.props.bars,
-			data: _this.props.data,
-			user: _this.props.user
+			data: _this.props.data
 		};
 		return _this;
 	}
@@ -37328,7 +37327,7 @@ var SearchResults = function (_Component) {
 
 			if (this.state.bars) {
 				return this.state.bars.map(function (est) {
-					return _react2.default.createElement(_Establishment2.default, { key: est.id, about: est, user: _this2.state.user, data: _this2.state.data });
+					return _react2.default.createElement(_Establishment2.default, { key: est.id, about: est, user: _this2.props.user, data: _this2.state.data });
 				});
 			} else {
 				return _react2.default.createElement(
@@ -37385,10 +37384,7 @@ var Establishment = function (_Component) {
 	function Establishment(props) {
 		_classCallCheck(this, Establishment);
 
-		var _this = _possibleConstructorReturn(this, (Establishment.__proto__ || Object.getPrototypeOf(Establishment)).call(this, props));
-
-		console.log(_this.props);
-		return _this;
+		return _possibleConstructorReturn(this, (Establishment.__proto__ || Object.getPrototypeOf(Establishment)).call(this, props));
 	}
 
 	_createClass(Establishment, [{
@@ -37419,13 +37415,13 @@ var Establishment = function (_Component) {
 					id = city._id;
 				}
 			});
-			//console.log(user);
 			if (!userGoing) {
 				return _react2.default.createElement(
 					'form',
 					{ onSubmit: function onSubmit() {
 							return e.preventDefault();
 						}, action: '/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT', method: 'post' },
+					console.log('/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT'),
 					_react2.default.createElement('input', { className: 'btn btn-warning', type: 'submit', value: 'Going?', name: 'isGoing' })
 				);
 			} else {
