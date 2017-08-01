@@ -37415,14 +37415,15 @@ var Establishment = function (_Component) {
 					id = city._id;
 				}
 			});
-			if (!userGoing) {
+			if (!userGoing && user !== undefined && user !== 'noUser') {
 				return _react2.default.createElement(
 					'form',
 					{ onSubmit: function onSubmit() {
 							return e.preventDefault();
 						}, action: '/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT', method: 'post' },
 					console.log('/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT'),
-					_react2.default.createElement('input', { className: 'btn btn-warning', type: 'submit', value: 'Going?', name: 'isGoing' })
+					_react2.default.createElement('input', { type: 'hidden', value: user, name: 'peopleGoing' }),
+					_react2.default.createElement('input', { className: 'btn btn-warning', type: 'submit', value: 'Going?' })
 				);
 			} else {
 				return _react2.default.createElement(

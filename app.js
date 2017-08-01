@@ -9,6 +9,9 @@ var LocalStrategy = require("passport-local");
 var TwitStrategy = require('passport-twitter').Strategy;
 var yelp = require('yelp-fusion');
 
+var middleware = require('./middleware/middleware');
+var isLoggedIn = middleware.isLoggedIn;
+
 //To get rid of mongoose promise warning
 mongoose.Promise = global.Promise;
 
@@ -108,19 +111,31 @@ app.get('/api/user', function(req, res, next){
 	}
 });
 
-app.put('/add-user/:id/:user/:estab', function(req, res, next){
+app.put('/add-user/:id/:user/:estab', isLoggedIn, function(req, res, next){
 	let id = req.params.id;
 	let user = req.params.user;
 	let estab = req.params.estab;
+	console.log(req.body);
 	Searches.findByIdAndUpdate(id, req.body, function(err, foundCity){
 		if(err){
 			console.log(err);
 		} else {
+			//console.log('FoundCity = ' + foundCity);
 			foundCity.results.forEach((bar,i)=>{
 				if(bar.id === estab){
-					foundCity.results[i].peopleGoing.push(user);
+					let people = foundCity.results[i].peopleGoing;
+					people.push(req.body.peopleGoing);
+					foundCity.results[i].peopleGoing = people;
+					Searches.findByIdAndUpdate(id, foundCity, function(err, city){
+						if(err){
+							console.log(err);
+						} else {
+							console.log('User added to Going list');
+						}
+					});
 				}
 			});
+			
 			res.redirect('back')
 		}
 	});

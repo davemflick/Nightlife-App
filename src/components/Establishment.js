@@ -26,11 +26,12 @@ export default class Establishment extends Component{
 				id = city._id;
 			}
 		})
-		if(!userGoing){
+		if(!userGoing && user !== undefined && user !== 'noUser'){
 			return(
 				<form onSubmit={()=> e.preventDefault()} action={'/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT'} method='post'>
 				    {console.log('/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT')}
-					<input className='btn btn-warning' type='submit' value='Going?' name='isGoing'/>
+				    <input type='hidden' value={user} name='peopleGoing' />
+					<input className='btn btn-warning' type='submit' value='Going?'/>
 				</form>
 			)
 		} else {
