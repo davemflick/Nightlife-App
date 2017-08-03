@@ -37463,6 +37463,31 @@ var Establishment = function (_Component) {
 			}
 		}
 	}, {
+		key: 'renderListOfPeople',
+		value: function renderListOfPeople() {
+			var people = this.props.about.peopleGoing;
+			if (people.length > 0) {
+				var list = '';
+				for (var i = 0; i < people.length; i++) {
+					i === people.length - 1 ? list += people[i] : list += people[i] + ', ';
+				}
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'h3',
+						null,
+						' People Going '
+					),
+					_react2.default.createElement(
+						'p',
+						null,
+						list
+					)
+				);
+			}
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
@@ -37511,7 +37536,12 @@ var Establishment = function (_Component) {
 						),
 						_react2.default.createElement(
 							'div',
-							{ className: 'whosGoing' },
+							{ className: 'goingContainer' },
+							this.renderListOfPeople()
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'userGoing' },
 							this.renderIfGoing()
 						)
 					)

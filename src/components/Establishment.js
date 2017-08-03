@@ -55,6 +55,23 @@ export default class Establishment extends Component{
 		}
 	}
 
+	renderListOfPeople(){
+		let people = this.props.about.peopleGoing;
+		if(people.length > 0){
+			let list = '';
+			for( let i=0; i<people.length; i++){
+				i === people.length - 1 ? 
+				list += people[i]:
+				list += (people[i] + ', ');
+			}
+			return (<div>
+				<h3> People Going </h3>
+				<p>{list}</p>
+			</div>
+			)
+		}
+	}
+
 	render(){
 		return(
 			<div className='estabCont container'>
@@ -69,7 +86,10 @@ export default class Establishment extends Component{
 								<p className='addressStart'>{this.props.about.address[0]}</p>
 								<p>{this.props.about.address[1]}</p>
 							</div>
-							<div className='whosGoing'>
+							<div className='goingContainer'>
+									{this.renderListOfPeople()}
+							</div>
+							<div className='userGoing'>
 								{this.renderIfGoing()}
 							</div>
 						</div>
