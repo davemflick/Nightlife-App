@@ -5,10 +5,17 @@ export default class Establishment extends Component{
 		super(props);
 	}
 
+	returnCityId(){
+		this.props.data.forEach(city=>{
+			if(city.city === this.props.about.city){
+				this.setState({id: city._id})
+			}
+		})
+	}
+
 	findUserInEstabs(){
 		let userGoing = false;
 		this.props.about.peopleGoing.forEach(person=>{
-			console.log('Person: ' + person + ' props.user: ' + this.props.user)
 			if(person === this.props.user){
 				userGoing = true;
 			}
@@ -24,18 +31,23 @@ export default class Establishment extends Component{
 		this.props.data.forEach(city=>{
 			if(city.city === this.props.about.city){
 				id = city._id;
+				
 			}
 		})
 		if(!userGoing && user !== undefined && user !== 'noUser'){
 			return(
-				<form onSubmit={()=> e.preventDefault()} action={'/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT'} method='post'>
-				    {console.log('/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT')}
+				<form action={'/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT'} method='post'>
 				    <input type='hidden' value={user} name='peopleGoing' />
 					<input className='btn btn-warning' type='submit' value='Going?'/>
 				</form>
 			)
 		} else {
-			return <h4> YOU"RE GOING </h4>
+			return (
+				<div>
+				  <h4> YOU"RE GOING </h4>
+				  {this.removeFromGoing()}
+				</div>
+			)
 		}
 	}
 
@@ -55,14 +67,30 @@ export default class Establishment extends Component{
 		}
 	}
 
+	removeFromGoing(){
+		let id;
+		let bar = this.props.about.id;
+		let user = this.props.user;
+		this.props.data.forEach(city=>{
+			if(city.city === this.props.about.city){
+				id = city._id;
+			}
+		})
+		return (
+			<form action={'/remove/'+id+'/'+user+'/'+bar+'?_method=PUT'} method='post'>
+				<input type='submit' className='btn btn-danger' value='Cancel?' />
+			</form>
+		)
+	}
+
 	renderListOfPeople(){
 		let people = this.props.about.peopleGoing;
 		if(people.length > 0){
 			let list = '';
 			for( let i=0; i<people.length; i++){
 				i === people.length - 1 ? 
-				list += people[i]:
-				list += (people[i] + ', ');
+				list += ( '@'+people[i]):
+				list += ('@'+people[i] + ', ');
 			}
 			return (<div>
 				<h3> People Going </h3>

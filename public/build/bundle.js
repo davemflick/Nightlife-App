@@ -37388,14 +37388,24 @@ var Establishment = function (_Component) {
 	}
 
 	_createClass(Establishment, [{
+		key: 'returnCityId',
+		value: function returnCityId() {
+			var _this2 = this;
+
+			this.props.data.forEach(function (city) {
+				if (city.city === _this2.props.about.city) {
+					_this2.setState({ id: city._id });
+				}
+			});
+		}
+	}, {
 		key: 'findUserInEstabs',
 		value: function findUserInEstabs() {
-			var _this2 = this;
+			var _this3 = this;
 
 			var userGoing = false;
 			this.props.about.peopleGoing.forEach(function (person) {
-				console.log('Person: ' + person + ' props.user: ' + _this2.props.user);
-				if (person === _this2.props.user) {
+				if (person === _this3.props.user) {
 					userGoing = true;
 				}
 			});
@@ -37404,32 +37414,34 @@ var Establishment = function (_Component) {
 	}, {
 		key: 'determineButtonRender',
 		value: function determineButtonRender() {
-			var _this3 = this;
+			var _this4 = this;
 
 			var userGoing = this.findUserInEstabs();
 			var user = this.props.user;
 			var estab = this.props.about.id;
 			var id = void 0;
 			this.props.data.forEach(function (city) {
-				if (city.city === _this3.props.about.city) {
+				if (city.city === _this4.props.about.city) {
 					id = city._id;
 				}
 			});
 			if (!userGoing && user !== undefined && user !== 'noUser') {
 				return _react2.default.createElement(
 					'form',
-					{ onSubmit: function onSubmit() {
-							return e.preventDefault();
-						}, action: '/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT', method: 'post' },
-					console.log('/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT'),
+					{ action: '/add-user/' + id + '/' + user + '/' + estab + '?_method=PUT', method: 'post' },
 					_react2.default.createElement('input', { type: 'hidden', value: user, name: 'peopleGoing' }),
 					_react2.default.createElement('input', { className: 'btn btn-warning', type: 'submit', value: 'Going?' })
 				);
 			} else {
 				return _react2.default.createElement(
-					'h4',
+					'div',
 					null,
-					' YOU"RE GOING '
+					_react2.default.createElement(
+						'h4',
+						null,
+						' YOU"RE GOING '
+					),
+					this.removeFromGoing()
 				);
 			}
 		}
@@ -37463,13 +37475,32 @@ var Establishment = function (_Component) {
 			}
 		}
 	}, {
+		key: 'removeFromGoing',
+		value: function removeFromGoing() {
+			var _this5 = this;
+
+			var id = void 0;
+			var bar = this.props.about.id;
+			var user = this.props.user;
+			this.props.data.forEach(function (city) {
+				if (city.city === _this5.props.about.city) {
+					id = city._id;
+				}
+			});
+			return _react2.default.createElement(
+				'form',
+				{ action: '/remove/' + id + '/' + user + '/' + bar + '?_method=PUT', method: 'post' },
+				_react2.default.createElement('input', { type: 'submit', className: 'btn btn-danger', value: 'Cancel?' })
+			);
+		}
+	}, {
 		key: 'renderListOfPeople',
 		value: function renderListOfPeople() {
 			var people = this.props.about.peopleGoing;
 			if (people.length > 0) {
 				var list = '';
 				for (var i = 0; i < people.length; i++) {
-					i === people.length - 1 ? list += people[i] : list += people[i] + ', ';
+					i === people.length - 1 ? list += '@' + people[i] : list += '@' + people[i] + ', ';
 				}
 				return _react2.default.createElement(
 					'div',

@@ -139,8 +139,41 @@ app.put('/add-user/:id/:user/:estab', isLoggedIn, function(req, res, next){
 			res.redirect('back')
 		}
 	});
-
 })
+
+//DELETE USER FROM ESTAB PEOPLEGOING LIST
+
+app.put('/remove/:id/:user/:bar', function(req,res,next){
+	let id = req.params.id;
+	let user = req.params.user;
+	let bar = req.params.bar;
+	Searches.findById(id, function(err, cityData){
+		if(err){
+			console.log('ERROR in finding user to delete - ' + err);
+			res.redirect('back')
+		} else {
+			cityData.results.forEach((estab, i)=>{
+				if(estab.id === bar){
+					let people = []
+					estab.peopleGoing.forEach(person=>{
+						if(person !== user){
+							people.push(person);
+						}
+					});
+					cityData.results[i].peopleGoing = people;
+					Searches.findByIdAndUpdate(id, cityData, function(err, city){
+						if(err){
+							console.log("Error in removing person "+ err)
+						} else {
+							console.log("User successfully removed from list");
+						}
+					})
+				}
+			})
+			res.redirect('back');
+		}
+	});
+});
 
 
 app.listen(process.env.PORT || 3000, process.env.IP, function(err){
