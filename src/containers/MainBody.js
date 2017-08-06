@@ -20,14 +20,14 @@ export default class MainBody extends Component{
 			let city= '';
 			for(var i=loc.length-1; i>0; i--){
 				if(loc[i] === '/'){
-					city = loc.slice(i+1).toLowerCase();
+					city = loc.slice(i+1).split('%20').join(' ').toLowerCase();
 					break;
 				}
 			}
 			let cityArray = res.data.city;
 			let curCity;
 			for(var i=0; i< cityArray.length; i++){
-				if(cityArray[i].city === city.split(' ')[0]){
+				if(cityArray[i].city === city){
 					curCity = cityArray[i];
 					break;
 				}

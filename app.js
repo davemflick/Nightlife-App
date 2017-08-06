@@ -77,6 +77,7 @@ app.use('/api', api);
 
 //ROUTES
 app.get('/', function(req, res, next){
+	currentURL = '/';
 	res.render('index', {user: req.user});
 });
 
