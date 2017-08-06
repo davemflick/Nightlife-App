@@ -27,12 +27,6 @@ mongoose.connect('mongodb://localhost/nightlife', {useMongoClient: true}, (err)=
 	}
 });
 
-//Bring routes in from 'routes' directory
-var results = require('./routes/results');
-app.use(results);
-var api = require('./routes/api');
-app.use('/api', api);
-
 //App Set Up
 app.set('view engine', 'pug');
 app.use(express.static('public'));
@@ -74,27 +68,17 @@ passport.deserializeUser(function(obj, callback){
 });
 
 
+//Bring routes in from 'routes' directory
+var results = require('./routes/results');
+app.use(results);
+var api = require('./routes/api');
+app.use('/api', api);
+
 
 //ROUTES
 app.get('/', function(req, res, next){
 	res.render('index', {user: req.user});
 });
-
-app.get('/failed-login', function(req, res, next){
-	res.render('index');
-});
-
-app.get('/twitter/login', passport.authenticate('twitter'));
-
-app.get('/twitter/return', passport.authenticate('twitter', {
-	failureRedirect: '/failed-login'
-}), function(req, res){res.redirect('back')});
-
-app.get('/logout', function(req, res){
-	req.logout();
-	res.redirect('back');
-})
-
 
 //middleware to determine if user is logged in or not, pass to every template
 app.use((req,res,next)=>{
@@ -174,6 +158,24 @@ app.put('/remove/:id/:user/:bar', function(req,res,next){
 		}
 	});
 });
+
+
+app.get('/failed-login', function(req, res, next){
+	res.render('index');
+});
+
+app.get('/twitter/login', passport.authenticate('twitter'));
+
+app.get('/twitter/return', passport.authenticate('twitter', {
+	failureRedirect: '/failed-login',
+}), function(req, res){
+	res.redirect('back');
+});
+
+app.get('/logout', function(req, res){
+	req.logout();
+	res.redirect('back');
+})
 
 
 app.listen(process.env.PORT || 3000, process.env.IP, function(err){

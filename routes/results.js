@@ -22,6 +22,7 @@ router.get('/results/:id', function(req, res, next){
 	})
 })
 
+
 //On City Search, Run a Yelp API call, return results, create new db record of search.
 // Redirect back to results/city
 router.post('/search/:id', function(req, res, next){
