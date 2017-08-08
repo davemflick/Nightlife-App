@@ -181,13 +181,25 @@ body {
 }
 
 @media screen and (max-width: 650px){
+	.form-group{
+		input.form-control{
+			width: 70% !important;
+		}
+		.input-group-btn{
+			width: 30% !important;
+		}
+	}
 	.aboutCont{
 		img.img.img-responsive.img-rounded{
-			max-width: 280px;
+			width: 50%;
 			margin: auto;
 		}
 		.aboutEst{
-			width: 80%;
+			width: 50%;
+		}
+		.peopleGoingContainer{
+			width: 100%;
+			margin: 0 auto;
 		}
 	}
 }
@@ -195,10 +207,13 @@ body {
 @media screen and (max-width: 480px){
 	.aboutCont{
 		img.img.img-responsive.img-rounded{
-			max-width: 220px;
+			width: 80%;
 		}
 		.aboutEst{
-			width: 90%;
+			width: 80%;
+		}
+		.peopleGoingContainer{
+			width: 100%;
 		}
 	}
 }

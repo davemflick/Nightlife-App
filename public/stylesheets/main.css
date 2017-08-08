@@ -131,15 +131,25 @@ body {
   padding: 10px; }
 
 @media screen and (max-width: 650px) {
+  .form-group input.form-control {
+    width: 70% !important; }
+  .form-group .input-group-btn {
+    width: 30% !important; }
+
   .aboutCont img.img.img-responsive.img-rounded {
-    max-width: 280px;
+    width: 50%;
     margin: auto; }
   .aboutCont .aboutEst {
-    width: 80%; } }
+    width: 50%; }
+  .aboutCont .peopleGoingContainer {
+    width: 100%;
+    margin: 0 auto; } }
 @media screen and (max-width: 480px) {
   .aboutCont img.img.img-responsive.img-rounded {
-    max-width: 220px; }
+    width: 80%; }
   .aboutCont .aboutEst {
-    width: 90%; } }
+    width: 80%; }
+  .aboutCont .peopleGoingContainer {
+    width: 100%; } }
 
 /*# sourceMappingURL=main.css.map */
