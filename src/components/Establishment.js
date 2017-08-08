@@ -44,7 +44,7 @@ export default class Establishment extends Component{
 		} else {
 			return (
 				<div>
-				  <h4> YOU"RE GOING </h4>
+				  <h4> Going!! </h4>
 				  {this.removeFromGoing()}
 				</div>
 			)
@@ -58,7 +58,7 @@ export default class Establishment extends Component{
 			return this.determineButtonRender();
 		} else {
 			return (
-				<div>
+				<div className='twitLogin'>
 				<p> Login With
 					<span><a href='/twitter/login'> Twitter </a></span>
 				 to let your friends know you're going! </p>
@@ -107,13 +107,15 @@ export default class Establishment extends Component{
 					<div className='aboutCont'>
 						<img className='img img-responsive img-rounded' src={this.props.about.image} />
 						<div className='aboutEst '>
-							<h4>{"Rating: " + this.props.about.rating}</h4>
-							<h4>{"Price: " + this.props.about.price}</h4>
+							<h4>Rating: <span className='ratingSpan'> {this.props.about.rating} </span></h4>
+							<h4>Price: <span className='moneySpan'>{ this.props.about.price} </span></h4>
 							<div className='address'>
 								<h5>Address:</h5>
 								<p className='addressStart'>{this.props.about.address[0]}</p>
 								<p>{this.props.about.address[1]}</p>
 							</div>
+						</div>
+						<div className='peopleGoingContainer'>
 							<div className='goingContainer'>
 									{this.renderListOfPeople()}
 							</div>

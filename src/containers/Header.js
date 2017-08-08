@@ -29,7 +29,9 @@ export default class Header extends Component{
 	render(){
 		return(
 			<div className='headerContainer'>
-				<h1 className='mainHeader'> My Nightlife </h1>
+				<h1 className='mainHeader'> Your Local Nightlife App</h1>
+				<h5> Results gathered by:</h5>
+				<div className='yelpLogo'></div>
 				{this.renderLoginOption()}
 			</div>
 		)

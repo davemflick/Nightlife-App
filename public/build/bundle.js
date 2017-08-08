@@ -29928,8 +29928,14 @@ var Header = function (_Component) {
 				_react2.default.createElement(
 					'h1',
 					{ className: 'mainHeader' },
-					' My Nightlife '
+					' Your Local Nightlife App'
 				),
+				_react2.default.createElement(
+					'h5',
+					null,
+					' Results gathered by:'
+				),
+				_react2.default.createElement('div', { className: 'yelpLogo' }),
 				this.renderLoginOption()
 			);
 		}
@@ -37231,13 +37237,13 @@ var SearchBar = function (_Component) {
 							return e.preventDefault();
 						}, action: '/search/' + this.state.location, method: 'post' },
 					_react2.default.createElement(
+						'label',
+						null,
+						'Search City'
+					),
+					_react2.default.createElement(
 						'div',
 						{ className: 'form-group' },
-						_react2.default.createElement(
-							'label',
-							null,
-							'Search City'
-						),
 						_react2.default.createElement('input', {
 							type: 'search',
 							className: 'form-control',
@@ -37246,14 +37252,18 @@ var SearchBar = function (_Component) {
 							onChange: function onChange(e) {
 								return _this2.handleChange(e.target.value);
 							},
-							placeholder: 'City, State' })
-					),
-					_react2.default.createElement(
-						'button',
-						{ onSubmit: function onSubmit() {
-								return e.preventDefault();
-							}, type: 'submit', className: 'btn btn-primary' },
-						'Search'
+							placeholder: 'City, State' }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'input-group-btn' },
+							_react2.default.createElement(
+								'button',
+								{ onSubmit: function onSubmit() {
+										return e.preventDefault();
+									}, type: 'submit', className: 'searchBtn btn btn-primary' },
+								'Search'
+							)
+						)
 					)
 				)
 			);
@@ -37439,7 +37449,7 @@ var Establishment = function (_Component) {
 					_react2.default.createElement(
 						'h4',
 						null,
-						' YOU"RE GOING '
+						' Going!! '
 					),
 					this.removeFromGoing()
 				);
@@ -37455,7 +37465,7 @@ var Establishment = function (_Component) {
 			} else {
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'twitLogin' },
 					_react2.default.createElement(
 						'p',
 						null,
@@ -37539,12 +37549,25 @@ var Establishment = function (_Component) {
 						_react2.default.createElement(
 							'h4',
 							null,
-							"Rating: " + this.props.about.rating
+							'Rating: ',
+							_react2.default.createElement(
+								'span',
+								{ className: 'ratingSpan' },
+								' ',
+								this.props.about.rating,
+								' '
+							)
 						),
 						_react2.default.createElement(
 							'h4',
 							null,
-							"Price: " + this.props.about.price
+							'Price: ',
+							_react2.default.createElement(
+								'span',
+								{ className: 'moneySpan' },
+								this.props.about.price,
+								' '
+							)
 						),
 						_react2.default.createElement(
 							'div',
@@ -37564,7 +37587,11 @@ var Establishment = function (_Component) {
 								null,
 								this.props.about.address[1]
 							)
-						),
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'peopleGoingContainer' },
 						_react2.default.createElement(
 							'div',
 							{ className: 'goingContainer' },

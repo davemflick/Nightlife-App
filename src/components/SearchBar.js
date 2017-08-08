@@ -18,8 +18,8 @@ export default class SearchBar extends Component{
 		return(
 			<div className='searchFormContainer'>
 				<form onSubmit={()=> e.preventDefault()} action={'/search/' + this.state.location} method='post'>
+				<label>Search City</label>
 					<div className='form-group'>
-						<label>Search City</label>
     					<input 
     						type="search" 
     						className="form-control" 
@@ -27,8 +27,10 @@ export default class SearchBar extends Component{
     						value={this.state.location} 
     						onChange={(e)=> this.handleChange(e.target.value)}
     						placeholder="City, State" />
+    						<div className='input-group-btn'>
+    							<button onSubmit={()=> e.preventDefault()} type='submit' className='searchBtn btn btn-primary'>Search</button>
+    						</div>
 					</div>
-					<button onSubmit={()=> e.preventDefault()} type='submit' className='btn btn-primary'>Search</button>
 				</form>
 			</div>
 		)
