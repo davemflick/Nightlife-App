@@ -13,7 +13,7 @@ body, html {
 }
 
 body {
-	background-color: #eee;
+	background-color: #fbfbfb;
 }
 
 .headerContainer{
@@ -29,6 +29,7 @@ body {
 	}
 	h1, a{
 		text-align: center;
+		color: #00648C;
 	}
 }
 
@@ -65,20 +66,60 @@ body {
 	}
 }
 
+@keyframes slideInFromLeft{
+	0% {
+		transform: translateX(-120%);
+		opacity: 0;
+	}
+
+	80% {
+		transform: translateX(5%);
+		opacity: 0.8;
+	}
+
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+}
+@keyframes slideInFromRight{
+	0% {
+		transform: translateX(120%);
+		opacity: 0;
+	}
+	80% {
+		transform: translateX(-5%);
+		opacity: 0.8;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+.searchResultsContainer .estabCont:nth-of-type(even){
+	animation: 1.3s ease-in 0s 1 slideInFromRight;;
+}
+
+.searchResultsContainer .estabCont:nth-of-type(odd){
+	animation: 1.3s ease-in 0s 1 slideInFromLeft;
+}
+
 .searchResultsContainer{
 	margin: 10px auto;
-	border: 1px solid black;
-	padding: 2em;
 	.estabCont{
-		border: 2px solid #555;
-		box-shadow: 3px 3px 2px #222;
+		border: 2px solid #337AB7;
+		box-shadow: 2px 2px 1px #225765;
 		border-radius: 12px;
 		margin-bottom: 20px;
-		padding: 15px;
+		padding: 25px 10px 30px 10px;
 		width: 95%;
+		background-color: #fff;
 		h1 {
 			text-align: center;
 			margin: 0 0 25px 0;
+			color: #00648C;
 		}
 		.aboutCont{
 			display: flex;
@@ -88,12 +129,16 @@ body {
 			img{
 				width: 25%;
 				max-width: 150px;
-				margin-right: 20px;
+				margin: 0 auto;
 				display: inline-block;
+				border: 2px solid #28AADC;
 			}
 			.aboutEst {
 				width: 35%;
 				text-align: center;
+				display: flex;
+				justify-content: space-between;
+				flex-direction: column;
 				h4 .ratingSpan{
 					color: blue;
 				}

@@ -6,7 +6,7 @@ body, html {
   font-family: 'Bitter', serif; }
 
 body {
-  background-color: #eee; }
+  background-color: #fbfbfb; }
 
 .headerContainer {
   text-align: center; }
@@ -19,7 +19,8 @@ body {
     background-position: 50% 50%;
     margin: 15px auto; }
   .headerContainer h1, .headerContainer a {
-    text-align: center; }
+    text-align: center;
+    color: #00648C; }
 
 .mainBodyContainer .searchFormContainer {
   margin: 0 auto;
@@ -43,20 +44,46 @@ body {
         display: inline;
         width: 100%; }
 
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0; }
+  80% {
+    transform: translateX(5%);
+    opacity: 0.8; }
+  100% {
+    transform: translateX(0);
+    opacity: 1; } }
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(120%);
+    opacity: 0; }
+  80% {
+    transform: translateX(-5%);
+    opacity: 0.8; }
+  100% {
+    transform: translateX(0);
+    opacity: 1; } }
+.searchResultsContainer .estabCont:nth-of-type(even) {
+  animation: 1.3s ease-in 0s 1 slideInFromRight; }
+
+.searchResultsContainer .estabCont:nth-of-type(odd) {
+  animation: 1.3s ease-in 0s 1 slideInFromLeft; }
+
 .searchResultsContainer {
-  margin: 10px auto;
-  border: 1px solid black;
-  padding: 2em; }
+  margin: 10px auto; }
   .searchResultsContainer .estabCont {
-    border: 2px solid #555;
-    box-shadow: 3px 3px 2px #222;
+    border: 2px solid #337AB7;
+    box-shadow: 2px 2px 1px #225765;
     border-radius: 12px;
     margin-bottom: 20px;
-    padding: 15px;
-    width: 95%; }
+    padding: 25px 10px 30px 10px;
+    width: 95%;
+    background-color: #fff; }
     .searchResultsContainer .estabCont h1 {
       text-align: center;
-      margin: 0 0 25px 0; }
+      margin: 0 0 25px 0;
+      color: #00648C; }
     .searchResultsContainer .estabCont .aboutCont {
       display: flex;
       justify-content: space-between;
@@ -65,11 +92,15 @@ body {
       .searchResultsContainer .estabCont .aboutCont img {
         width: 25%;
         max-width: 150px;
-        margin-right: 20px;
-        display: inline-block; }
+        margin: 0 auto;
+        display: inline-block;
+        border: 2px solid #28AADC; }
       .searchResultsContainer .estabCont .aboutCont .aboutEst {
         width: 35%;
-        text-align: center; }
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column; }
         .searchResultsContainer .estabCont .aboutCont .aboutEst h4 .ratingSpan {
           color: blue; }
         .searchResultsContainer .estabCont .aboutCont .aboutEst h4 .moneySpan {
