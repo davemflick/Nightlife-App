@@ -3,13 +3,13 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
+
+//Models
+var Searches = require('../models/Searches');
+
 //Body-Parser
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
-
-//Models
-var User = require('../models/User');
-var Searches = require('../models/Searches');
 
 //This api gets called by axios in react.. It will return Searches collection.
 //If any of the Searches are not from the current day, it will delete them.
