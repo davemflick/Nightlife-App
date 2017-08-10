@@ -11,10 +11,6 @@ var yelp = require('yelp-fusion');
 
 var middleware = require('./middleware/middleware');
 var isLoggedIn = middleware.isLoggedIn;
-
-//To get rid of mongoose promise warning
-mongoose.Promise = global.Promise;
-
 let currentURL = '/';
 //Models
 var User = require('./models/User');
@@ -31,13 +27,13 @@ mongoose.connect(dbURL, {useMongoClient: true}, (err)=>{
 	}
 });
 
-app.listen(process.env.PORT || 3000, function(err){
-	if(err){
-		console.log("FAILED SERVER, APP.LISTEN PROBLEM");
-	} else {
-		console.log('NIGHTLIFE SERVER UP AND RUNNING');
-	}
-})
+
+//To get rid of mongoose promise warning
+mongoose.Promise = global.Promise;
+
+
+//Bring routes in from 'routes' directory
+var api = require('./routes/api');
 
 //App Set Up
 app.use(express.static('public'));
@@ -79,17 +75,15 @@ passport.deserializeUser(function(obj, callback){
 	callback(null, obj);
 });
 
-
-
 //ROUTES
 app.get('/', function(req, res, next){
 	currentURL = '/';
 	res.render('index', {user: req.user});
 });
 
-//Bring routes in from 'routes' directory
-var api = require('./routes/api');
-app.use('/api', api);
+app.get('/favicon.ico', function(req, res, next){
+	res.render('index', {user: req.user});
+});
 
 app.get('/results/:id', function(req, res, next){
 	currentURL = req.url;
@@ -259,4 +253,14 @@ app.get('/logout', function(req, res){
 	res.redirect('back');
 })
 
+app.use('/api', api);
+
+
+app.listen(process.env.PORT || 3000, function(err){
+	if(err){
+		console.log("FAILED SERVER, APP.LISTEN PROBLEM");
+	} else {
+		console.log('NIGHTLIFE SERVER UP AND RUNNING');
+	}
+})
 
