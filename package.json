@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "description": "Full-stack web app for freeCodeCamp",
   "main": "app.js",
+  "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "author": "David Flick",
-  "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
     "babel-core": "^6.25.0",
