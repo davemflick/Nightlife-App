@@ -105,7 +105,7 @@ app.post('/search/:id', function(req, res, next){
 			client.search({
 			  location: city,
 			  term: 'bar',
-			  limit: 2
+			  limit: 10
 			}).then(response => {
 			  cityData = response.jsonBody.businesses;
 			  createCityInstance(city, cityData);
@@ -252,7 +252,7 @@ app.get('/logout', function(req, res){
 })
 
 
-app.listen(process.env.PORT || 3000, process.env.IP, function(err){
+app.listen(process.env.PORT || 3000, function(err){
 	if(err){
 		console.log("FAILED SERVER, APP.LISTEN PROBLEM");
 	} else {
