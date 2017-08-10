@@ -13,7 +13,6 @@ var middleware = require('./middleware/middleware');
 var isLoggedIn = middleware.isLoggedIn;
 let currentURL = '/';
 //Models
-var User = require('./models/User');
 var Searches = require('./models/Searches');
 
 
