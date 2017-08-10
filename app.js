@@ -40,8 +40,8 @@ app.listen(process.env.PORT || 3000, function(err){
 })
 
 //App Set Up
-app.set('view engine', 'pug');
 app.use(express.static('public'));
+app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -80,17 +80,16 @@ passport.deserializeUser(function(obj, callback){
 });
 
 
-//Bring routes in from 'routes' directory
-
-var api = require('./routes/api');
-app.use('/api', api);
-
 
 //ROUTES
 app.get('/', function(req, res, next){
 	currentURL = '/';
 	res.render('index', {user: req.user});
 });
+
+//Bring routes in from 'routes' directory
+var api = require('./routes/api');
+app.use('/api', api);
 
 app.get('/results/:id', function(req, res, next){
 	currentURL = req.url;
