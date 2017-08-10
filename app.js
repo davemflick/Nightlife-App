@@ -22,6 +22,7 @@ var Searches = require('./models/Searches');
 
 
 var dbURL = process.env.NIGHTLIFE_APP || 'mongodb://localhost/nightlife';
+
 mongoose.connect(dbURL, {useMongoClient: true}, (err)=>{
 	if(err){
 		console.log("Error connecting to database, error= " + err);
@@ -29,6 +30,14 @@ mongoose.connect(dbURL, {useMongoClient: true}, (err)=>{
 		console.log("Mongoose connected to database");
 	}
 });
+
+app.listen(process.env.PORT || 3000, function(err){
+	if(err){
+		console.log("FAILED SERVER, APP.LISTEN PROBLEM");
+	} else {
+		console.log('NIGHTLIFE SERVER UP AND RUNNING');
+	}
+})
 
 //App Set Up
 app.set('view engine', 'pug');
@@ -252,10 +261,3 @@ app.get('/logout', function(req, res){
 })
 
 
-app.listen(process.env.PORT || 3000, function(err){
-	if(err){
-		console.log("FAILED SERVER, APP.LISTEN PROBLEM");
-	} else {
-		console.log('NIGHTLIFE SERVER UP AND RUNNING');
-	}
-})
