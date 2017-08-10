@@ -20,7 +20,9 @@ let currentURL = '/';
 var User = require('./models/User');
 var Searches = require('./models/Searches');
 
-mongoose.connect('mongodb://localhost/nightlife', {useMongoClient: true}, (err)=>{
+
+var dbURL = process.env.NIGHTLIFE_APP || 'mongodb://localhost/nightlife';
+mongoose.connect(dbURL, {useMongoClient: true}, (err)=>{
 	if(err){
 		console.log("Error connecting to database, error= " + err);
 	} else {
