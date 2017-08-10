@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var methodOverride = require('method-override');
 var passport = require('passport');
-var LocalStrategy = require("passport-local");
 var TwitStrategy = require('passport-twitter').Strategy;
 var yelp = require('yelp-fusion');
 
@@ -66,7 +65,6 @@ passport.use(new TwitStrategy({
 //Set up passport
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(function(user, callback){
 	callback(null, user);
 });
