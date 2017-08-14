@@ -53,7 +53,7 @@ app.use(methodOverride("_method"));
 passport.use(new TwitStrategy({
 	consumerKey: process.env.TWITTER_KEY,
 	consumerSecret: process.env.TWITTER_SECRET,
-	callbackURL: 'http://localhost:3000/twitter/return'
+	callbackURL: 'https://my-nightlife-fcc-app.herokuapp.com/twitter/return'
 }, function(token, tokenSecret, profile, callback){
 	return callback(null, profile);
 }));
